@@ -129,6 +129,16 @@ footer, ad slots. Standvirtual: home, listing pages, ad detail, the `/vender` la
 and the login app. Not yet audited: OLX login, "A tua conta", chat and the ad-publishing
 form; Standvirtual account, messages and the ad-publishing form.
 
+## Commits and versions
+
+The project targets semver, so commit messages must follow Conventional Commits:
+`fix:` → patch, `feat:` → minor, `feat!:` / `BREAKING CHANGE:` → major. This is what
+semver automation (release-please / semantic-release style, run CI-side — the repo
+stays dependency-free) derives versions from. Use an English `type: imperative
+summary` line under ~72 chars, with a body explaining the why when it isn't obvious.
+Keep `manifest.json`'s `version` and the git tag in step: bump both when cutting a
+release. The baseline is `v0.2.0`.
+
 ## Things not to do
 
 - Do not filter, invert or dim listing photos. Only ad creatives are dimmed (to 0.8
