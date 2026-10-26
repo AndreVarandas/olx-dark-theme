@@ -1,0 +1,69 @@
+# Fires when release-please publishes a GitHub Release (i.e. its release PR
+# was merged). Validates the sources with the checks documented in CLAUDE.md,
+# then attaches a zip of the unpacked extension to the Release. The web-store
+# job is opt-in (see the comment on it).
+name: publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax-check the scripts
+        run: |
+          node --check src/background.js
+          node --check src/content.js
+      - name: Parse the manifests
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('manifest.json', 'utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('release-please-config.json', 'utf8'))"
+
+  github-release:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Zip the unpacked extension
+        # git ls-files keeps the archive to exactly the tracked, shippable
+        # files — no .git/.github dot-dirs, no local strays.
+        run: git ls-files | zip -q "olx-dark-theme-${GITHUB_REF_NAME}.zip" -@
+      - name: Attach the zip to the Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" "olx-dark-theme-${GITHUB_REF_NAME}.zip"
+
+  web-store:
+    # Opt-in. To turn on: register on the Chrome Web Store developer console
+    # (one-time $5), create the item once by hand, then add the repo secrets
+    # CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET, CWS_REFRESH_TOKEN
+    # and set the repo variable PUBLISH_TO_WEB_STORE=true. Without the
+    # variable this job never runs; with it, each release is uploaded to the
+    # store as a draft for review. To fully auto-publish, add --auto-publish
+    # to the upload command below.
+    if: vars.PUBLISH_TO_WEB_STORE == 'true'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Zip the unpacked extension
+        run: git ls-files | zip -q extension.zip -@
+      - name: Upload draft to the Chrome Web Store
+        env:
+          EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: npx --yes chrome-webstore-upload-cli upload --source extension.zip

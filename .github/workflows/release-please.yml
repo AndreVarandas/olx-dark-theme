@@ -1,0 +1,23 @@
+# Derives the next version from Conventional Commits on main and maintains the
+# release PR (bumps manifest.json via the chrome-ext release type, updates
+# CHANGELOG.md). Merging that PR is the release decision: release-please then
+# cuts the tag and the GitHub Release, which triggers publish.yml.
+name: release-please
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          default-branch: main
+          # Version and bump rules: release-please-config.json +
+          # .release-please-manifest.json

@@ -125,9 +125,17 @@ dark-on-dark (colour luminance < 90 over a background < 70) and, more generally,
 ratio below ~2.5 against the nearest opaque ancestor background. Skip text over images.
 
 Verified so far — OLX: home, category listings, search results, ad detail, header menu,
-footer, ad slots. Standvirtual: home, listing pages, ad detail, the `/vender` landing page
-and the login app. Not yet audited: OLX login, "A tua conta", chat and the ad-publishing
-form; Standvirtual account, messages and the ad-publishing form.
+footer, ad slots, "A tua conta" (`/myaccount`), payment history, user settings,
+candidate profile, the chat list plus a conversation thread, favourites
+(`/favoritos/*`, rendered by the `observed-page` component), saved searches, the
+package-purchase flow (`/purchase/packages/*`) and wallet top-up, the ad-publishing
+form, and the legacy `/landingbundles` marketing page. Standvirtual: home, listing
+pages, ad detail, the `/vender` landing page and the login app.
+
+Two things are deliberately out of scope: `business.olx.pt` (the "Pacotes de anúncios"
+footer link redirects there — a separate WordPress site, not in the allowlist) and
+`help.olx.pt`. Not yet audited: OLX login, and Standvirtual account, messages and the
+ad-publishing form.
 
 ## Commits and versions
 
@@ -136,8 +144,15 @@ The project targets semver, so commit messages must follow Conventional Commits:
 semver automation (release-please / semantic-release style, run CI-side — the repo
 stays dependency-free) derives versions from. Use an English `type: imperative
 summary` line under ~72 chars, with a body explaining the why when it isn't obvious.
-Keep `manifest.json`'s `version` and the git tag in step: bump both when cutting a
-release. The baseline is `v0.2.0`.
+Keep `manifest.json`'s `version` and the git tag in step — release-please does the
+bumping for you. The baseline is `v0.2.0`.
+
+The automation lives in `.github/workflows/` and stays inert until the repo gains a
+GitHub remote: release-please keeps a release PR open (bumping `manifest.json`,
+writing `CHANGELOG.md`); merging it cuts the tag, the GitHub Release and a zip of
+the unpacked extension. Chrome Web Store upload is opt-in via the
+`PUBLISH_TO_WEB_STORE` repo variable plus `CWS_*` secrets. CI-plumbing commits are
+`ci:`/`chore:` so they do not consume a version bump.
 
 ## Things not to do
 
