@@ -1,0 +1,8 @@
+# Action pins stay on floating majors; Dependabot opens a PR whenever an
+# action ships a new release, so updates are reviewed instead of automatic.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

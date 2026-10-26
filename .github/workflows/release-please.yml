@@ -8,6 +8,11 @@ on:
   push:
     branches: [main]
 
+# Back-to-back pushes would otherwise race on the same release PR; runs queue.
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pull-requests: write
