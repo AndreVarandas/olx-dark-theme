@@ -1,0 +1,46 @@
+/* ==========================================================================
+   OLX Dark — structure
+   Things the token layer cannot cover: the page canvas, the default text
+   colour, native controls, selection and focus.
+   ========================================================================== */
+
+/* OLX leaves html/body transparent and lets the browser paint white, so the
+   canvas has to be set explicitly. */
+html[data-olxd="1"],
+html[data-olxd="1"] body {
+  background-color: var(--olxd-page) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Native controls --------------------------------------------------
+   Nested :not() keeps this off checkboxes and radios: OLX styles those with
+   appearance:none, where background-color *is* the control. */
+html[data-olxd="1"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="submit"]):not([type="button"]),
+html[data-olxd="1"] textarea,
+html[data-olxd="1"] select {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+  border-color: var(--olxd-line-strong) !important;
+}
+
+html[data-olxd="1"] select,
+html[data-olxd="1"] option,
+html[data-olxd="1"] optgroup {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] ::placeholder {
+  color: var(--olxd-text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* ---- Selection & focus ------------------------------------------------ */
+html[data-olxd="1"] ::selection {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-on-accent) !important;
+}
+
+html[data-olxd="1"] :focus-visible {
+  outline-color: var(--olxd-accent);
+}

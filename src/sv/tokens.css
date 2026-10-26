@@ -1,0 +1,284 @@
+/* ==========================================================================
+   Standvirtual Dark — palette
+   --------------------------------------------------------------------------
+   Standvirtual runs the same OLX Group design system as OLX.pt, but on Next.js
+   (`#__next` instead of `#hydrate-root`) and with four token layers instead of
+   two:
+
+     1. primitives   --primitivesColorsGray07Black      (the raw ramps)
+     2. semantic     --color-background-primary         (Tailwind utilities)
+     3. camelCase    --colorsBackgroundPrimary          (duplicate family)
+     4. turbo        --color-turbo-content-default      (newer component set)
+
+   All four are overridden here. The palette is lifted from the dark values the
+   site itself ships for the turbo layer, so our dark theme matches theirs
+   rather than inventing a second one.
+
+   Same trap as OLX: the tokens are declared on elements below <html>, and an
+   element's own declaration beats an inherited !important. Overrides therefore
+   target html, body and #__next together.
+   ========================================================================== */
+
+html[data-svd="1"],
+html[data-svd="1"] body,
+html[data-svd="1"] #__next {
+  color-scheme: dark !important;
+
+  /* Our own tokens, consumed by theme.css and patches.css. */
+  --olxd-page: #111213;
+  --olxd-surface: #1c1d1f;
+  --olxd-surface-2: #0b0c0d;
+  --olxd-surface-3: #242526;
+  --olxd-text: #ffffff;
+  --olxd-text-dim: #afb4b6;
+  --olxd-text-muted: #71777a;
+  --olxd-line: #ffffff1f;
+  --olxd-line-strong: #63686b;
+  --olxd-accent: #69b1ff;
+  --olxd-on-accent: #ffffff;
+  --olxd-action: #056ee8;
+
+  /* ---- 1. Primitives ------------------------------------------------
+     A seven-step ramp per hue. Light mode reads 01 (lightest) to 07
+     (darkest); dark mode flips the direction of every ramp. */
+  --primitivesColorsGray01White: #0b0c0d;
+  --primitivesColorsGray02Gray: #111213;
+  --primitivesColorsGray03Gray: #1c1d1f;
+  --primitivesColorsGray04Gray: #2a2c2e;
+  --primitivesColorsGray05Gray: #63686b;
+  --primitivesColorsGray06Gray: #afb4b6;
+  --primitivesColorsGray07Black: #f2f4f5;
+
+  --primitivesColorsBlue01BlueBGLight: #0a2142;
+  --primitivesColorsBlue02BlueLight: #12325e;
+  --primitivesColorsBlue03BlueTintLight: #1b4f86;
+  --primitivesColorsBlue04BlueTintDark: #4da3f0;
+  --primitivesColorsBlue05BluePrimary: #056ee8;
+  --primitivesColorsBlue06BlueDark: #69b1ff;
+  --primitivesColorsBlue07BlueBGDark: #c7e1ff;
+
+  --primitivesColorsGreen01GreenBGLight: #052422;
+  --primitivesColorsGreen02GreenLight: #06332c;
+  --primitivesColorsGreen03GreenTintLight: #0a3d33;
+  --primitivesColorsGreen04GreenTintDark: #4ebe9c;
+  --primitivesColorsGreen05GreenPrimary: #4ebe9c;
+  --primitivesColorsGreen06GreenDark: #73e2c0;
+  --primitivesColorsGreen07GreenBGDark: #bee7db;
+
+  --primitivesColorsYellow01YellowBGLight: #2c1c0b;
+  --primitivesColorsYellow02YellowLight: #3a2e08;
+  --primitivesColorsYellow03YellowTintLight: #4a3a0a;
+  --primitivesColorsYellow04YellowTintDark: #6b5400;
+  --primitivesColorsYellow05YellowPrimary: #fec338;
+  --primitivesColorsYellow06YellowDark: #ffd576;
+  --primitivesColorsYellow07YellowBGDark: #ffe896;
+  --primitivesColorsYellow08YellowBlack: #ffe896;
+
+  --primitivesColorsRed01RedBGLight: #2e0203;
+  --primitivesColorsRed02RedLight: #3f0a05;
+  --primitivesColorsRed03RedTintLight: #6b1a10;
+  --primitivesColorsRed04RedTintDark: #ee6554;
+  --primitivesColorsRed05RedPrimary: #de282b;
+  --primitivesColorsRed06RedDark: #ff8169;
+  --primitivesColorsRed07RedBGDark: #ffcac3;
+
+  /* ---- 2. Semantic tokens (kebab-case) ------------------------------ */
+  --color-background-primary: #111213;
+  --color-background-secondary: #0b0c0d;
+  --color-background-elevated: #1c1d1f;
+  --color-background-inverse: #050506;
+  --color-background-disabled: #2a2c2e;
+  --color-background-action-primary: #056ee8;
+  --color-background-accent: #056ee8;
+  --color-background-accent-subtle: #0a2142;
+  --color-background-accent-tint: #16436e;
+  --color-background-status-error: #de282b;
+  --color-background-status-error-subtle: #2e0203;
+  --color-background-status-success: #1f6b55;
+  --color-background-status-success-subtle: #021f00;
+  --color-background-status-warning: #fec338;
+  --color-background-status-warning-subtle: #2c1c0b;
+  --color-background-brand-notification-neutral: #242526;
+  --color-background-brand-fields-disabled: #111213;
+  --color-background-brand-confirmationScreen-warning: #2e0203;
+  --color-background-purple: #8245b9;
+  --color-background-transparent: #00000000;
+
+  --color-foreground-primary: #ffffff;
+  --color-foreground-secondary: #afb4b6;
+  --color-foreground-disabled: #63686b;
+  --color-foreground-placeholder: #71777a;
+  --color-foreground-accent: #94c9ff;
+  --color-foreground-action-primary: #94c9ff;
+  --color-foreground-on-accent: #ffffff;
+  --color-foreground-on-accent-subtle: #d4ebff;
+  --color-foreground-on-action-primary: #ffffff;
+  --color-foreground-on-dark: #ffffff;
+  --color-foreground-on-inverse: #ffffff;
+  --color-foreground-on-light: #111213;
+  --color-foreground-on-error: #ffffff;
+  --color-foreground-on-success: #111213;
+  --color-foreground-on-warning: #111213;
+  --color-foreground-status-error: #ffcac3;
+  --color-foreground-status-success: #baec91;
+  --color-foreground-status-warning: #ffd576;
+
+  --color-border-subtle: #ffffff1f;
+  --color-border-medium: #63686b;
+  --color-border-strong: #e1e5e7;
+  --color-border-inverse: #111213;
+  --color-border-action-primary: #69b1ff;
+  --color-border-accent: #69b1ff;
+  --color-border-focus: #69b1ff;
+  --color-border-disabled: #3a3f41;
+  --color-border-status-error: #de282b;
+  --color-border-status-success: #00000000;
+  --color-border-status-warning: #00000000;
+
+  --color-opacity-primary-subtle: #ffffff14;
+  --color-opacity-primary-medium: #ffffff26;
+  --color-opacity-primary-strong: #ffffff3d;
+  --color-opacity-secondary-subtle: #ffffff1f;
+  --color-opacity-secondary-medium: #ffffff66;
+  --color-opacity-secondary-strong: #111213cc;
+  --color-opacity-overlay-backdrop: #000000cc;
+  --color-opacity-overlay-backdrop-inverse: #ffffffcc;
+  --color-opacity-overlay-shadow: #00000099;
+
+  /* Brand aliases. These reference a legacy primitive family that is not
+     defined, so each one falls back to a hardcoded light hex. They have to be
+     overridden by name, not through the primitives above. */
+  --color-pir: #1b2340;
+  --color-green-light: #052422;
+  --color-green-light-02: #0a3d33;
+  --color-green-tint-light: #0a3d33;
+  --color-green-tint-medium: #06332c;
+  --color-green-primary: #4ebe9c;
+  --color-blue-light: #12325e;
+  --color-blue-dark: #4da3f0;
+  --color-gray: #1c1d1f;
+  --color-02-gray: #111213;
+  --color-yellow-03: #4a3a0a;
+  --color-yellow-04-dark-tint: #4a3a0a;
+  --color-red-primary: #de282b;
+  --color-red-light: #2e0203;
+  --color-red-tint-light: #6b1a10;
+  --color-red-tint-dark: #ee6554;
+  --color-action-disabled: #ffffff14;
+
+  /* ---- 3. Semantic tokens (camelCase duplicate family) --------------- */
+  --colorsBackgroundPrimary: #111213;
+  --colorsBackgroundSecondary: #0b0c0d;
+  --colorsBackgroundElevated: #1c1d1f;
+  --colorsBackgroundInverse: #050506;
+  --colorsBackgroundDisabled: #2a2c2e;
+  --colorsBackgroundActionPrimary: #056ee8;
+  --colorsBackgroundAccent: #056ee8;
+  --colorsBackgroundAccentSubtle: #0a2142;
+  --colorsBackgroundStatusError: #de282b;
+  --colorsBackgroundStatusErrorSubtle: #2e0203;
+  --colorsBackgroundStatusSuccess: #1f6b55;
+  --colorsBackgroundStatusSuccessSubtle: #021f00;
+  --colorsBackgroundStatusWarning: #fec338;
+  --colorsBackgroundStatusWarningSubtle: #2c1c0b;
+  --colorsBackgroundTransparent: #00000000;
+
+  --colorsForegroundPrimary: #ffffff;
+  --colorsForegroundSecondary: #afb4b6;
+  --colorsForegroundDisabled: #63686b;
+  --colorsForegroundPlaceholder: #71777a;
+  --colorsForegroundAccent: #94c9ff;
+  --colorsForegroundActionPrimary: #94c9ff;
+  --colorsForegroundOnAccent: #ffffff;
+  --colorsForegroundOnAccentSubtle: #d4ebff;
+  --colorsForegroundOnActionPrimary: #ffffff;
+  --colorsForegroundOnDark: #ffffff;
+  --colorsForegroundOnInverse: #ffffff;
+  --colorsForegroundOnLight: #111213;
+  --colorsForegroundOnError: #ffffff;
+  --colorsForegroundOnSuccess: #111213;
+  --colorsForegroundOnWarning: #111213;
+  --colorsForegroundStatusError: #ffcac3;
+  --colorsForegroundStatusSuccess: #baec91;
+  --colorsForegroundStatusWarning: #ffd576;
+
+  --colorsBorderSubtle: #ffffff1f;
+  --colorsBorderMedium: #63686b;
+  --colorsBorderStrong: #e1e5e7;
+  --colorsBorderInverse: #111213;
+  --colorsBorderActionPrimary: #69b1ff;
+  --colorsBorderAccent: #69b1ff;
+  --colorsBorderFocus: #69b1ff;
+  --colorsBorderDisabled: #3a3f41;
+  --colorsBorderStatusError: #de282b;
+  --colorsBorderStatusSuccess: #00000000;
+  --colorsBorderStatusWarning: #00000000;
+
+  --colorsOpacityPrimarySubtle: #ffffff14;
+  --colorsOpacityPrimaryMedium: #ffffff26;
+  --colorsOpacityPrimaryStrong: #ffffff3d;
+  --colorsOpacitySecondarySubtle: #ffffff1f;
+  --colorsOpacitySecondaryMedium: #ffffff66;
+  --colorsOpacitySecondaryStrong: #111213cc;
+  --colorsOpacityOverlayBackdrop: #000000cc;
+  --colorsOpacityOverlayBackdropInverse: #ffffffcc;
+  --colorsOpacityOverlayShadow: #00000099;
+
+  /* ---- 4. Turbo tokens ----------------------------------------------
+     The newer component set. These are the site's own dark values; the
+     markup uses them through utilities such as text-turbo-content-muted. */
+  --color-turbo-container-accent: #056ee8;
+  --color-turbo-container-accent-disabled: #24292b;
+  --color-turbo-container-accent-muted: #0a2142;
+  --color-turbo-container-accent-muted-disabled: #323739;
+  --color-turbo-container-attention: #fec338;
+  --color-turbo-container-attention-muted: #2c1c0b;
+  --color-turbo-container-backdrop: #1c2022a8;
+  --color-turbo-container-deep: #e9f4fb61;
+  --color-turbo-container-default: #111213;
+  --color-turbo-container-elevated: #242526c2;
+  --color-turbo-container-elevated-strong: #242526ed;
+  --color-turbo-container-error: #de282b;
+  --color-turbo-container-error-muted: #2e0203;
+  --color-turbo-container-inverse: #fff;
+  --color-turbo-container-inverse-disabled: #afb4b6;
+  --color-turbo-container-muted: #bee3ed1c;
+  --color-turbo-container-muted-disabled: #323739;
+  --color-turbo-container-positive: #a0e65c;
+  --color-turbo-container-positive-muted: #021f00;
+
+  --color-turbo-content-accent: #94c9ff;
+  --color-turbo-content-accent-muted: #d4ebff;
+  --color-turbo-content-default: #fff;
+  --color-turbo-content-default-disabled: #63686b;
+  --color-turbo-content-error: #ffcac3;
+  --color-turbo-content-inverse: #111213;
+  --color-turbo-content-inverse-disabled: #111213cc;
+  --color-turbo-content-muted: #afb4b6;
+  --color-turbo-content-on-accent: #fff;
+  --color-turbo-content-on-attention: #111213;
+  --color-turbo-content-on-elevated: #fff;
+  --color-turbo-content-on-error: #fff;
+  --color-turbo-content-on-inverse: #111213;
+  --color-turbo-content-on-positive: #111213;
+  --color-turbo-content-placeholder: #71777a;
+  --color-turbo-content-success: #baec91;
+  --color-turbo-content-transparent: #fff0;
+  --color-turbo-content-warning: #ffd576;
+
+  --color-turbo-border-accent: #69b1ff;
+  --color-turbo-border-default: #63686b;
+  --color-turbo-border-elevated: #ffffff0f;
+  --color-turbo-border-elevated-strong: #0000005c;
+  --color-turbo-border-error: #de282b;
+  --color-turbo-border-inverse: #111213;
+  --color-turbo-border-muted: #3a3f41;
+  --color-turbo-border-strong: #e1e5e7;
+
+  --color-turbo-state-accent-hover: #ffffff2e;
+  --color-turbo-state-default-hover: #ffffff26;
+  --color-turbo-state-default-press: #ffffff40;
+  --color-turbo-state-elevated-hover: #fff3;
+  --color-turbo-state-inverse-hover: #000;
+  --color-turbo-state-muted-hover: #ffffff26;
+}

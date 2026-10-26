@@ -1,0 +1,183 @@
+/* ==========================================================================
+   OLX Dark — palette
+   --------------------------------------------------------------------------
+   OLX.pt is themed with semantic CSS custom properties consumed by Tailwind
+   utilities (bg-background-primary, text-foreground-secondary, ...). Overriding
+   those properties re-skins the whole site.
+
+   Two things make this work:
+   1. OLX declares the tokens on <body>/<#hydrate-root>, and an element's own
+      declaration beats an inherited one — even an inherited !important. So the
+      overrides must be applied to html, body and #hydrate-root together. The
+      logged-in account and chat apps mount under #client-root, which is set
+      with the same overrides.
+   2. Every token exists twice, in kebab (`--color-*`) and camel (`--colors*`)
+      form. Both are used in the wild; both are set here.
+   ========================================================================== */
+
+html[data-olxd="1"],
+html[data-olxd="1"] body,
+html[data-olxd="1"] #hydrate-root,
+html[data-olxd="1"] #client-root {
+  color-scheme: dark !important;
+
+  /* Our own tokens, consumed by theme.css and patches.css. */
+  --olxd-page: #000000;
+  --olxd-surface: #0d0d0d;
+  --olxd-surface-2: #161616;
+  --olxd-surface-3: #1f1f1f;
+  --olxd-text: #e6e6e6;
+  --olxd-text-dim: #9e9e9e;
+  --olxd-text-muted: #6e6e6e;
+  --olxd-line: #ffffff14;
+  --olxd-line-strong: #ffffff24;
+  --olxd-accent: #23e5db;
+  --olxd-on-accent: #001414;
+
+  /* ---- Backgrounds -------------------------------------------------- */
+  /* Legacy promo banners (the "Alerta!" box in the account/chat header) fill
+     from a primitive rather than a semantic token, so the primitive has to be
+     flipped by name. */
+  --primitivesColorsLightBlue02BlueLight: #12325e !important;
+
+  --color-background-primary: #0d0d0d !important;
+  --colorsBackgroundPrimary: #0d0d0d !important;
+
+  --color-background-secondary: #000000 !important;
+  --colorsBackgroundSecondary: #000000 !important;
+
+  --color-background-elevated: #161616 !important;
+  --colorsBackgroundElevated: #161616 !important;
+
+  --color-background-inverse: #050505 !important;
+  --colorsBackgroundInverse: #050505 !important;
+
+  --color-background-accent: #23e5db !important;
+  --colorsBackgroundAccent: #23e5db !important;
+
+  --color-background-accent-subtle: #0a2e2c !important;
+  --colorsBackgroundAccentSubtle: #0a2e2c !important;
+
+  /* Used as the hover fill behind dark header menus, so it stays dark. */
+  --color-background-action-primary: #1f1f1f !important;
+  --colorsBackgroundActionPrimary: #1f1f1f !important;
+
+  --color-background-action-secondary: #ffffff14 !important;
+  --colorsBackgroundActionSecondary: #ffffff14 !important;
+
+  --color-background-disabled: #262626 !important;
+  --colorsBackgroundDisabled: #262626 !important;
+
+  --color-background-status-error: #ff5a36 !important;
+  --colorsBackgroundStatusError: #ff5a36 !important;
+  --color-background-status-error-subtle: #3a1208 !important;
+  --colorsBackgroundStatusErrorSubtle: #3a1208 !important;
+
+  --color-background-status-success: #0f7a78 !important;
+  --colorsBackgroundStatusSuccess: #0f7a78 !important;
+  --color-background-status-success-subtle: #052422 !important;
+  --colorsBackgroundStatusSuccessSubtle: #052422 !important;
+
+  --color-background-status-warning: #ffce32 !important;
+  --colorsBackgroundStatusWarning: #ffce32 !important;
+  --colorsBackgroundStatusWarningSubtle: #3a2e08 !important;
+
+  --colorsBackgroundPhoto: #000000a6 !important;
+  --colorsBackgroundTransparent: #00000000 !important;
+
+  /* ---- Foregrounds -------------------------------------------------- */
+  --color-foreground-primary: #e6e6e6 !important;
+  --colorsForegroundPrimary: #e6e6e6 !important;
+
+  --color-foreground-secondary: #9e9e9e !important;
+  --colorsForegroundSecondary: #9e9e9e !important;
+
+  /* Bright enough to read on --color-background-disabled (#262626): the light
+     theme's #5A5A5A drops to 2.2:1 there. */
+  --color-foreground-disabled: #7a7a7a !important;
+  --colorsForegroundDisabled: #7a7a7a !important;
+
+  --color-foreground-placeholder: #6e6e6e !important;
+  --colorsForegroundPlaceholder: #6e6e6e !important;
+
+  --color-foreground-accent: #23e5db !important;
+  --colorsForegroundAccent: #23e5db !important;
+
+  --color-foreground-action-primary: #23e5db !important;
+  --colorsForegroundActionPrimary: #23e5db !important;
+
+  --color-foreground-on-accent: #001414 !important;
+  --colorsForegroundOnAccent: #001414 !important;
+  --colorsForegroundOnAccentSubtle: #7ff3ed !important;
+
+  --color-foreground-on-dark: #e6e6e6 !important;
+  --colorsForegroundOnDark: #e6e6e6 !important;
+
+  --color-foreground-on-inverse: #e6e6e6 !important;
+  --colorsForegroundOnInverse: #e6e6e6 !important;
+
+  --colorsForegroundOnActionPrimary: #e6e6e6 !important;
+  --colorsForegroundOnError: #1a0603 !important;
+  --colorsForegroundOnSuccess: #001414 !important;
+  --colorsForegroundOnWarning: #001414 !important;
+  --colorsForegroundOnLight: #001414 !important;
+  --colorsForegroundOnPhoto: #02282c !important;
+
+  --color-foreground-status-error: #ff8169 !important;
+  --colorsForegroundStatusError: #ff8169 !important;
+  --color-foreground-status-success: #3cded8 !important;
+  --colorsForegroundStatusSuccess: #3cded8 !important;
+  --color-foreground-status-warning: #e8c15a !important;
+  --colorsForegroundStatusWarning: #e8c15a !important;
+
+  /* ---- Borders ------------------------------------------------------ */
+  --color-border-subtle: #ffffff14 !important;
+  --colorsBorderSubtle: #ffffff14 !important;
+
+  --color-border-medium: #ffffff24 !important;
+  --colorsBorderMedium: #ffffff24 !important;
+
+  --color-border-strong: #3a3a3a !important;
+  --colorsBorderStrong: #3a3a3a !important;
+
+  --color-border-accent: #23e5db !important;
+  --colorsBorderAccent: #23e5db !important;
+
+  --color-border-action-primary: #3a3a3a !important;
+  --colorsBorderActionPrimary: #3a3a3a !important;
+
+  --color-border-disabled: #262626 !important;
+  --colorsBorderDisabled: #262626 !important;
+
+  --color-border-focus: #23e5db !important;
+  --colorsBorderFocus: #23e5db !important;
+
+  --color-border-status-error: #ff5a36 !important;
+  --colorsBorderStatusError: #ff5a36 !important;
+
+  --colorsBorderInverse: #e6e6e6 !important;
+  --colorsBorderStatusSuccess: #00000000 !important;
+  --colorsBorderStatusWarning: #00000000 !important;
+
+  /* ---- Opacity / shadows --------------------------------------------
+     These are black alphas in the light theme; on black they must become
+     white alphas or every shadow/overlay disappears. */
+  --color-opacity-primary-subtle: #ffffff14 !important;
+  --colorsOpacityPrimarySubtle: #ffffff14 !important;
+  --colorsOpacityPrimaryMedium: #ffffff24 !important;
+  --colorsOpacityPrimaryStrong: #ffffff3d !important;
+
+  --colorsOpacitySecondarySubtle: #ffffff1f !important;
+  --colorsOpacitySecondaryMedium: #ffffff66 !important;
+  --colorsOpacitySecondaryStrong: #ffffffa3 !important;
+
+  --colorsOpacityOverlayBackdrop: #000000d9 !important;
+  --colorsOpacityOverlayBackdropInverse: #ffffffcc !important;
+  --colorsOpacityOverlayShadow: #00000099 !important;
+
+  /* ---- Button icon toggles ------------------------------------------ */
+  --buttonIconToggleBackgroundColorSelected: #1f1f1f !important;
+  --buttonIconToggleBackgroundColorUnselected: #00000000 !important;
+  --buttonIconToggleIconColorSelected: #23e5db !important;
+  --buttonIconToggleIconColorUnselected: #e6e6e6 !important;
+}

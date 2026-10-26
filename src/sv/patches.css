@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Standvirtual Dark — patches
+   Components that hardcode colours instead of using the token layer. These are
+   matched by stable hooks (data-testid, aria-label, element type, attribute
+   selectors), never by generated emotion / CSS-module classes such as
+   .ooa-ljs66p, .css-16c4qoj or .CJYm8, which change on every deploy.
+   ========================================================================== */
+
+/* ---- Header -----------------------------------------------------------
+   The selected nav pill uses arbitrary Tailwind utilities with hardcoded
+   brand hexes. Arbitrary-value classes are source, not generated hashes, so
+   they are safe to match. */
+html[data-svd="1"] header[data-testid="page-header"] [class*="bg-[#E0F0FF]"] {
+  background-color: #12325e !important;
+}
+
+html[data-svd="1"] header[data-testid="page-header"] [class*="text-[#0F4394]"] {
+  color: #d4ebff !important;
+}
+
+/* ---- Advertising ------------------------------------------------------
+   Banner slots set a white background inline while the creative loads. Real
+   creatives render in cross-origin iframes and are left untouched. The banner
+   link is wrapped in a light shell that stays visible around the creative. */
+html[data-svd="1"] [data-testid="banner-link"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-svd="1"] div:has(> [data-testid="banner-link"]) {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* ---- Home page --------------------------------------------------------
+   The "deal of the day" ribbon is an arbitrary white utility class, used both
+   over the spotlight hero and on the gallery frame. */
+html[data-svd="1"] [data-testid="todays-pick-gallery-frame"] [class*="bg-[rgba(255,255,255,0.9)]"],
+html[data-svd="1"] [data-testid="todays-pick-spotlight"] [class*="bg-[rgba(255,255,255,0.9)]"] {
+  background-color: var(--olxd-surface-3) !important;
+  border-color: var(--olxd-line) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* Article cards read the "8 min" chip in the inverse content colour, which is
+   near-black in dark mode — invisible over the photo it sits on. */
+html[data-svd="1"] [data-testid="article-read-time"] {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Listing cards ----------------------------------------------------
+   The result-card shell is an emotion component with a hardcoded white fill
+   and a hardcoded #EBECEF thumbnail well. Titles and inline links inside it
+   also hardcode the light theme's near-black text colour. */
+html[data-svd="1"] [data-testid="search-results"] > article {
+  background-color: transparent !important;
+}
+
+/* Highlighted cards (the top row's leading offer) paint a pale blue frame;
+   the section inside already carries the card surface. */
+html[data-svd="1"] [data-testid="search-results"] article[data-highlighted="true"] {
+  background-color: transparent !important;
+}
+
+html[data-svd="1"] [data-testid="search-results"] article > section {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] [data-testid="search-results"] article > section > div:first-child {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* Carousel arrows and the "1 / 6" photo counter sit on top of the photo. */
+html[data-svd="1"] [data-testid="search-results"] article button[aria-label] {
+  background-color: var(--olxd-line) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] [data-testid="search-results"] article section > div:first-child > div > div:last-child {
+  background-color: #111213cc !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] [data-testid="search-results"] article h2 a {
+  color: var(--olxd-text) !important;
+}
+
+/* Links to the help centre wrap a paragraph with its own dark colour. */
+html[data-svd="1"] a[href*="ajuda.standvirtual.com"] p {
+  color: inherit !important;
+}
+
+/* The search box in the filter rail paints its wrapper white. The input
+   component's class name is stable; only the generated wrapper is matched. */
+html[data-svd="1"] [data-testid="filters"] div:has(> .n-textinput-layout) {
+  background-color: transparent !important;
+}
+
+/* "Promovido" badge. The button component forwards a colour prop as an
+   attribute, which is a stable hook; the fill itself is hardcoded. */
+html[data-svd="1"] [data-testid="search-results"] article button[color="blue"] {
+  background-color: #12325e !important;
+  color: #d4ebff !important;
+}
+
+/* "Configurável" uses a mint fill that is just as bright on dark. */
+html[data-svd="1"] [data-testid="search-results"] article button[color="green"] {
+  background-color: #0d2a1f !important;
+  color: #9fe6b5 !important;
+}
+
+/* Filter checkboxes inherit a hardcoded near-black label. */
+html[data-svd="1"] label:has(input[type="checkbox"]) span {
+  color: var(--olxd-text) !important;
+}
+
+/* Free-valuation aside in the results column: a light blue panel holding a
+   mint pill, both written as arbitrary Tailwind utilities. */
+html[data-svd="1"] [class*="bg-[#F0F5FA]"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] [class*="bg-[#E8FBE4]"] {
+  background-color: #0d2a1f !important;
+  color: #9fe6b5 !important;
+}
+
+/* The pagination strip paints a white band behind its page buttons. */
+html[data-svd="1"] main div:has(> div > ul > li > button[aria-current]) {
+  background-color: transparent !important;
+}
+
+html[data-svd="1"] main div:has(> div > ul > li > button[aria-current]) button[aria-current] {
+  color: var(--olxd-accent) !important;
+}
+
+/* Empty block shown while the next page of results loads. */
+html[data-svd="1"] [data-testid="search-results"] > div > div:only-child:empty {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* SEO link navigation above the footer: #F7F8FA with near-black headings and
+   links, and grey counts. */
+html[data-svd="1"] nav[data-testid="seo-navigation"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] nav[data-testid="seo-navigation"] h3,
+html[data-svd="1"] nav[data-testid="seo-navigation"] a {
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] nav[data-testid="seo-navigation"] a span {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* ---- Sell landing page ------------------------------------------------
+   The lead form and the article cards hardcode the light theme's near-black
+   for labels and headlines. */
+html[data-svd="1"] main label {
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] main article a h3 {
+  color: var(--olxd-text) !important;
+}
+
+/* App Store rating chip: a light blue arbitrary fill with white text. */
+html[data-svd="1"] [class*="bg-[#c4e5f3]"] {
+  background-color: #12325e !important;
+  color: #d4ebff !important;
+}
+
+/* ---- Ad detail --------------------------------------------------------
+   Photo thumbs and the service tiles are hardcoded #EBECEF wells. */
+html[data-svd="1"] [data-testid="photo-gallery"],
+html[data-svd="1"] [data-testid="photo-gallery-item"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-svd="1"] [data-testid="main-services"] li {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* The price-drop badge pairs a light green fill with our light green text. */
+html[data-svd="1"] [data-testid="price-drop-savings-badge"] {
+  background-color: #0d2a1f !important;
+}
+
+/* The VHR discount badge fills with `bg-foreground-accent`, which is the link
+   blue — a bright chip on an otherwise dark page. */
+html[data-svd="1"] [data-testid="cars-condition-vhr-slice"] [class*="bg-foreground-accent"] {
+  background-color: #12325e !important;
+  color: #d4ebff !important;
+}
+
+/* ---- Login app --------------------------------------------------------
+   login.standvirtual.com is the older "motors" layout: emotion styles with
+   hardcoded white panels. It has its own stable attribute hooks. */
+html[data-svd="1"] .login-page nav[data-testid="desktop-header"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] .login-page [data-testid="motors-layout"] > div,
+html[data-svd="1"] .login-page [data-testid="motors-layout"] > div > div,
+html[data-svd="1"] .login-page [data-testid="motors-layout"] > div > div > div {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] .login-page [data-testid="motors-layout"] > div > div > div > div {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] .login-page [data-testid="tabs"] > div > header > button {
+  background-color: transparent !important;
+  color: var(--olxd-text) !important;
+}
+
+/* Text inside the login app hardcodes the light theme's near-black. Buttons
+   and links are left alone so the brand blue keeps its meaning. */
+html[data-svd="1"] .login-page h1,
+html[data-svd="1"] .login-page h2,
+html[data-svd="1"] .login-page h3,
+html[data-svd="1"] .login-page h4,
+html[data-svd="1"] .login-page label,
+html[data-svd="1"] .login-page p,
+html[data-svd="1"] .login-page [or-separator],
+html[data-svd="1"] .login-page nav[data-testid="desktop-header"] a span {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Tables & dividers ------------------------------------------------ */
+html[data-svd="1"] hr {
+  border-color: var(--olxd-line) !important;
+}
+
+html[data-svd="1"] table,
+html[data-svd="1"] th,
+html[data-svd="1"] td {
+  border-color: var(--olxd-line) !important;
+}

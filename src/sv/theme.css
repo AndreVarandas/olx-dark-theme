@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Standvirtual Dark — structure
+   Things the token layer cannot cover: the page canvas, the default text
+   colour, native controls, selection and focus.
+   ========================================================================== */
+
+html[data-svd="1"],
+html[data-svd="1"] body {
+  background-color: var(--olxd-page) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Native controls --------------------------------------------------
+   Nested :not() keeps this off checkboxes and radios: the design system
+   styles those with appearance:none, where background-color *is* the control. */
+html[data-svd="1"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="submit"]):not([type="button"]),
+html[data-svd="1"] textarea,
+html[data-svd="1"] select {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+  border-color: var(--olxd-line-strong) !important;
+}
+
+html[data-svd="1"] select,
+html[data-svd="1"] option,
+html[data-svd="1"] optgroup {
+  background-color: var(--olxd-surface) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] ::placeholder {
+  color: var(--olxd-text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* ---- Selection & focus ------------------------------------------------ */
+html[data-svd="1"] ::selection {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] :focus-visible {
+  outline-color: var(--olxd-accent);
+}

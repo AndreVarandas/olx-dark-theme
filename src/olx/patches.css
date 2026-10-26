@@ -1,0 +1,390 @@
+/* ==========================================================================
+   OLX Dark — patches
+   Components that hardcode colours instead of using the token layer. These are
+   matched by stable hooks (data-testid, ids, element type) or by design-system
+   utility class names — never by generated emotion classes such as
+   .css-1ek5um8, which change on every deploy.
+   ========================================================================== */
+
+/* ---- Page containers --------------------------------------------------
+   The page shell paints #F2F4F5 from emotion classes. */
+html[data-olxd="1"] #mainContent {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Homepage: full-bleed section wrappers alternate #F2F4F5 and #FFFFFF. */
+html[data-olxd="1"] [data-testid="home-page"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] [data-testid="home-page"] > div,
+html[data-olxd="1"] [data-testid="home-page"] > div > div {
+  background-color: transparent !important;
+}
+
+/* A mint band above the footer. */
+html[data-olxd="1"] [data-testid="site-information"] {
+  background-color: var(--olxd-surface) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* Standvirtual cross-promo banner: a #F2F4F5 wrapper around a mint "positive"
+   banner card. Both are light, and the CTA is teal, so all three layers flip. */
+html[data-olxd="1"] div:has(> [data-testid="top-banner-wrapper"]) {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Design-system banners keep their light variant fills — mint for "positive",
+   periwinkle for "neutral" — while their text inherits the dark theme's light
+   colour. Neutralise the fill wherever a banner appears. */
+html[data-olxd="1"] [data-nx-name="Banner"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* The "Categorias Principais" and popular-search links hardcode the light
+   theme's dark teal. */
+html[data-olxd="1"] [data-testid="popular-box"] a {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="main"],
+html[data-olxd="1"] [data-testid="aside"] {
+  background-color: transparent !important;
+}
+
+/* ---- Ad detail page ---------------------------------------------------
+   The article column and the seller sidebar are legacy emotion panels with
+   hardcoded white fills. */
+html[data-olxd="1"] [data-testid="main"] > div,
+html[data-olxd="1"] [data-testid="aside"] > div,
+html[data-olxd="1"] [data-testid="seller_card"],
+html[data-olxd="1"] [data-testid="map-aside-section"],
+html[data-olxd="1"] [data-testid="ad-action-box"] {
+  background-color: var(--olxd-surface) !important;
+  color: var(--olxd-text) !important;
+  border-color: var(--olxd-line) !important;
+}
+
+/* The vehicle-history and partner cards hardcode the light theme's body
+   colour. Everything in the ad column is copy on a dark surface, so it takes
+   the light text colour. */
+html[data-olxd="1"] [data-testid="main"] p {
+  color: var(--olxd-text) !important;
+}
+
+/* The ad title inside the action box carries its own dark colour. */
+html[data-olxd="1"] [data-testid="ad-action-box"] h4 {
+  color: var(--olxd-text) !important;
+}
+
+/* The seller/contact card now sits in the main column, not the aside, and
+   paints white. Keyed on the phone block it always contains. */
+html[data-olxd="1"] [data-testid="main"] > section > div:has([data-testid="phones-container"]) {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* Inside that card the profile block paints a second white layer. */
+html[data-olxd="1"] [data-testid="user-profile-link"] > div {
+  background-color: transparent !important;
+}
+
+/* The two-column layout shell behind main and aside paints #F2F4F5. */
+html[data-olxd="1"] #mainContent > div > div:has([data-testid="main"]) {
+  background-color: transparent !important;
+}
+
+/* Related-ad placeholders while the carousel loads. */
+html[data-olxd="1"] [data-testid="qa-skeleton-item"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* Lazy-loaded bands below the ad — the seller's other ads and the
+   recommendations — paint #F2F4F5, and the cards inside them paint white. */
+html[data-olxd="1"] section:has([data-testid="adlist-slider"]) {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] [data-testid="ad-card"] > div {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* The "Ver todas" link in those band headers hardcodes the dark teal. */
+html[data-olxd="1"] section:has([data-testid="adlist-slider"]) > div > a {
+  color: var(--olxd-accent) !important;
+}
+
+/* ---- Primary CTAs -----------------------------------------------------
+   Hardcoded dark teal on white; on a black page they invert to the accent. */
+html[data-olxd="1"] [data-testid="search-submit"] {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-on-accent) !important;
+  border-color: var(--olxd-accent) !important;
+}
+
+html[data-olxd="1"] [data-testid="search-submit"] svg {
+  color: var(--olxd-on-accent) !important;
+}
+
+html[data-olxd="1"] [data-testid="post-new-ad-button"] {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-on-accent) !important;
+}
+
+html[data-olxd="1"] [data-testid="post-new-ad-button"]:hover,
+html[data-olxd="1"] [data-testid="search-submit"]:hover {
+  background-color: #6df0e8 !important;
+}
+
+/* ---- Tokens used as text colours --------------------------------------
+   OLX writes utilities like `text-background-action-primary`, which paints
+   text with a token we darkened for use as a *background*. Left alone, the
+   ad description renders #1F1F1F on #0D0D0D — invisible. */
+html[data-olxd="1"] [class*="text-background-action-primary"],
+html[data-olxd="1"] [class*="text-background-inverse"] {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [class*="text-background-status-error"] {
+  color: var(--color-foreground-status-error) !important;
+}
+
+html[data-olxd="1"] [class*="text-background-status-success"] {
+  color: var(--color-foreground-status-success) !important;
+}
+
+/* ---- Listing cards ----------------------------------------------------
+   The thumbnail wrapper paints a hardcoded #ECEEEF until the photo decodes. */
+html[data-olxd="1"] [data-testid="l-card"] a > div:first-child,
+html[data-olxd="1"] [data-testid="l-card"] div[type="list"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* ---- Footer ----------------------------------------------------------- */
+html[data-olxd="1"] #footerContent {
+  background-color: var(--olxd-page) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] #footerContent a {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] #footerContent a:hover {
+  color: var(--olxd-accent) !important;
+}
+
+/* The cookie-settings trigger is a button, not a link, and hardcodes the
+   light theme's dark teal. */
+html[data-olxd="1"] #footerContent button {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] #footerContent button:hover {
+  color: var(--olxd-accent) !important;
+}
+
+/* ---- Advertising slots ------------------------------------------------
+   Empty slots paint a white 1920x300 placeholder image; real creatives render
+   inside a cross-origin iframe. The placeholder is replaced by a dark surface
+   and creatives are dimmed just enough to stop them glaring — never inverted,
+   recoloured or hidden. Delete the `filter` rule to see them unaltered. */
+html[data-olxd="1"] [class*="with-placeholder"] {
+  background-image: none !important;
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] [data-testid="qa-advert-slot"] iframe {
+  filter: brightness(0.8) saturate(0.9);
+}
+
+/* ---- Filter widgets --------------------------------------------------- */
+html[data-olxd="1"] select {
+  background-image: none;
+}
+
+html[data-olxd="1"] fieldset,
+html[data-olxd="1"] legend {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Skeleton loaders -------------------------------------------------
+   Their shimmer is a white gradient; on black it reads as a flash. */
+html[data-olxd="1"] [class*="skeleton"],
+html[data-olxd="1"] [class*="Skeleton"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* ---- Account & chat apps ----------------------------------------------
+   Logged-in pages render under #client-root with the legacy emotion layout: a
+   white header band above a #F2F4F5 body band, both direct children of
+   #mainContent. */
+html[data-olxd="1"] #client-root #mainContent > div {
+  background-color: transparent !important;
+}
+
+/* The header band shared by the account app and the chat list — title, wallet
+   and promo banner — is hardcoded white. Every wrapper above it is a layout
+   div, so painting the whole ancestor chain is safe. */
+html[data-olxd="1"] div:has([data-testid="header-title"]) {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Paragraph links in that band — the promo banner's "Ajuda" — hardcode the
+   light theme's dark teal. Scoped to `p` so the primary CTA in the site header
+   keeps its on-accent label. */
+html[data-olxd="1"] div:has([data-testid="header-title"]) p a {
+  color: var(--olxd-accent) !important;
+}
+
+/* The chat app wraps its two panes in a second #F2F4F5 band. */
+html[data-olxd="1"] div:has(> [data-testid="active-conversations-list-page"]) {
+  background-color: transparent !important;
+}
+
+html[data-olxd="1"] [data-testid="active-conversations-list-page"] > section {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] [data-testid="tab-selector"],
+html[data-olxd="1"] [data-testid="select-conversation"] {
+  background-color: transparent !important;
+}
+
+/* The active chip is a teal fill whose label inherits the light body colour;
+   like the other accent fills it needs the dark on-accent colour. */
+html[data-olxd="1"] [data-testid="tab-selector"] [data-testid="tab-active"] button,
+html[data-olxd="1"] [data-testid="tab-selector"] [data-testid="tab-active"] button div {
+  color: var(--olxd-on-accent) !important;
+}
+
+/* Account and chat tab labels hardcode the light near-black. */
+html[data-olxd="1"] [data-testid="tabs-myaccount"] span,
+html[data-olxd="1"] [data-testid="tabs-myaccount"] a,
+html[data-olxd="1"] [data-testid="tabs-messages"] span,
+html[data-olxd="1"] [data-testid="tabs-payments"] span,
+html[data-olxd="1"] [data-testid="tabs-settings"] span,
+html[data-olxd="1"] [data-testid="tabs-candidateProfile"] span {
+  color: var(--olxd-text) !important;
+}
+
+/* Candidate-profile micro-frontend: it brings its own #F2F4F5 shell and a
+   light-blue preferences panel. Its dark-filled primary button uses the
+   background-primary token as a text colour (the dual-use trap). */
+html[data-olxd="1"] #candidate-profile-mf-container main {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] [data-testid="preferences-box"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* Its field labels are emotion divs in the light theme's dark teal, and the
+   "add more" link uses the on-photo colour. */
+html[data-olxd="1"] [data-testid="preferences-box"] > div > div {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="preferences-box"] a {
+  color: var(--olxd-accent) !important;
+}
+
+html[data-olxd="1"] #candidate-profile-mf-container [data-button-variant="primary"] {
+  color: var(--olxd-text) !important;
+}
+
+/* Payments page: the table head and body paint white, and the search form
+   wrapper paints white around an input that is already dark. */
+html[data-olxd="1"] #client-root #mainContent table thead {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-olxd="1"] #client-root #mainContent table tbody {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] #client-root #mainContent form:has(.n-textinput-layout) {
+  background-color: transparent !important;
+}
+
+/* Text-style design-system buttons hardcode the light theme's dark teal. */
+html[data-olxd="1"] [data-button-variant="tertiary"] {
+  color: var(--olxd-accent) !important;
+}
+
+/* The dates in the table's "valid until" cells carry their own dark colour. */
+html[data-olxd="1"] #client-root #mainContent table p {
+  color: var(--olxd-text) !important;
+}
+
+/* Disabled primary buttons keep the light theme's white fill. */
+html[data-olxd="1"] [data-button-variant="primary"][data-button-disabled="true"] {
+  background-color: var(--color-background-disabled) !important;
+  color: var(--color-foreground-disabled) !important;
+}
+
+/* ---- Favourites page (/observed) --------------------------------------
+   A legacy emotion page: a white header band, a #F2F4F5 toolbar strip and
+   white button groups, all four levels deep inside the page container. The
+   cards below already resolve through the dark tokens. */
+html[data-olxd="1"] [data-testid="observed-page"] > div,
+html[data-olxd="1"] [data-testid="observed-page"] > div > div,
+html[data-olxd="1"] [data-testid="observed-page"] > div > div > div,
+html[data-olxd="1"] [data-testid="observed-page"] > div > div > div > div {
+  background-color: transparent !important;
+}
+
+/* Section tabs are hardcoded in the light theme's muted teal, and the
+   "clear all" secondary button keeps a white fill. */
+html[data-olxd="1"] [data-testid="observed-page"] button[data-is-active="true"] {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="observed-page"] button[data-is-active="false"] {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] [data-testid="observed-page"] [data-button-variant="secondary"] {
+  background-color: var(--olxd-surface-2) !important;
+  border-color: var(--olxd-line) !important;
+}
+
+/* The scroll-to-top pill is a white circle on every legacy page. */
+html[data-olxd="1"] [data-testid="scroll-to-top-button"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* ---- Publish flow -----------------------------------------------------
+   The ad-creation entry point paints its own #F2F4F5 shell; the card inside
+   already resolves through the tokens. */
+html[data-olxd="1"] [data-testid="posting-fields-desktop-entry-point"] {
+  background-color: var(--olxd-page) !important;
+}
+
+/* ---- Purchase micro-frontend ------------------------------------------
+   Wallet top-up: the amount choices take their text colour from the light
+   theme's on-photo ink, and the outline is a light grey. */
+html[data-olxd="1"] [data-testid^="wallet-topup-variant"] {
+  color: var(--olxd-text) !important;
+  border-color: var(--olxd-line-strong) !important;
+}
+
+html[data-olxd="1"] [data-testid^="wallet-topup-variant"] > div {
+  color: var(--olxd-text) !important;
+}
+
+/* The numbered step badge pairs a dark teal fill with the background-primary
+   token as its text colour — the dual-use trap. */
+html[data-olxd="1"] [data-testid="purchase-mf-container"] h4 > div:first-child {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Tables & dividers ------------------------------------------------ */
+html[data-olxd="1"] hr {
+  border-color: var(--olxd-line) !important;
+}
+
+html[data-olxd="1"] table,
+html[data-olxd="1"] th,
+html[data-olxd="1"] td {
+  border-color: var(--olxd-line) !important;
+}
