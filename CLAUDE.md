@@ -112,8 +112,9 @@ instead of using tokens. Match on stable hooks — `data-testid` (Standvirtual e
 `search-results`, `page-header`, `banner-link`, `photo-gallery-item`, `main-services`,
 `price-drop-savings-badge`, `motors-layout`, `desktop-header`, `tabs`; OLX: `main`, `aside`,
 `seller_card`, `l-card`, `qa-advert-slot`, `home-page`, `search-submit`,
-`post-new-ad-button`; OLX mobile adds `data-cy="seller-other-ads"`), ids, element type, or arbitrary Tailwind values such as
-`[class*="bg-[#E0F0FF]"]` (those are source code, not generated hashes). Standvirtual
+`post-new-ad-button`, plus `data-cy="seller-other-ads"` on mobile), ids, element type, or
+arbitrary Tailwind values such as `[class*="bg-[#E0F0FF]"]` (those are source code, not
+generated hashes). Standvirtual
 also forwards stable attributes as hooks — `data-applied-filter-chip`,
 `data-clear-all-button`, `data-testid="data-table-header"` / `"desktop-datatable"`,
 `data-has-background`, `data-variant` — and its editorial app uses Tailwind-style
