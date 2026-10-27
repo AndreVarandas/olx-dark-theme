@@ -1,5 +1,7 @@
 # OLX & Standvirtual Dark
 
+![The OLX cars listing before and after the theme: the same page split diagonally, its light grey canvas on the left, true black with the site's teal accents on the right](screenshots/social-preview.jpg)
+
 An unofficial dark theme for [olx.pt](https://www.olx.pt) and
 [standvirtual.com](https://www.standvirtual.com), with an OLED-black palette on OLX and
 the sites' own dark palette on Standvirtual. One toolbar button turns it on and off for
