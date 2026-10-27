@@ -7,6 +7,15 @@ name: publish
 on:
   release:
     types: [published]
+  # release-please publishes its release with the workflow token, and GitHub
+  # does not chain workflows off GITHUB_TOKEN-created events — so the release
+  # event never reaches this workflow. Dispatch it for that tag explicitly:
+  #   gh workflow run publish.yml -f tag=v0.2.1
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish (e.g. v0.2.1)
+        required: true
 
 permissions:
   contents: write
@@ -14,8 +23,12 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/setup-node@v7
         with:
           node-version: 22
@@ -31,15 +44,19 @@ jobs:
   github-release:
     needs: validate
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
       - name: Zip the unpacked extension
         # Only the runtime files go into the archive: manifest, icons and
         # scripts/styles. Repo scaffolding (workflows, docs, configs) stays
         # out, so the zip is exactly what Chrome loads and what a store
         # upload expects.
         run: |
-          zip -q -r "olx-dark-theme-${GITHUB_REF_NAME}.zip" manifest.json icons src
+          zip -q -r "olx-dark-theme-${TAG}.zip" manifest.json icons src
           # The stable name gives a permanent link:
           # github.com/OWNER/REPO/releases/latest/download/olx-dark-theme.zip
           zip -q -r olx-dark-theme.zip manifest.json icons src
@@ -47,8 +64,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
-          gh release upload --clobber "$GITHUB_REF_NAME"
-          "olx-dark-theme-${GITHUB_REF_NAME}.zip" olx-dark-theme.zip
+          gh release upload --clobber "$TAG"
+          "olx-dark-theme-${TAG}.zip" olx-dark-theme.zip
 
   web-store:
     # Opt-in. To turn on: register on the Chrome Web Store developer console
@@ -61,8 +78,12 @@ jobs:
     if: vars.PUBLISH_TO_WEB_STORE == 'true'
     needs: validate
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
       - uses: actions/setup-node@v7
         with:
           node-version: 22
