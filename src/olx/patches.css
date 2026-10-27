@@ -257,6 +257,27 @@ html[data-olxd="1"] [data-testid="tab-selector"] [data-testid="tab-active"] butt
   color: var(--olxd-on-accent) !important;
 }
 
+/* The "ads per page" pagination control (50 / 100 / 200) is drawn in the
+   light theme's on-photo ink. */
+html[data-olxd="1"] [data-testid="ads-limit-list"] button {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] [data-testid="ads-limit-list"] button[aria-current="true"] {
+  color: var(--olxd-text) !important;
+}
+
+/* Chat thread: your own messages sit in a periwinkle bubble whose text is our
+   light body colour. Received messages are already black. */
+html[data-olxd="1"] [data-testid="sent-message"] > div {
+  background-color: #12325e !important;
+  color: #d4ebff !important;
+}
+
+html[data-olxd="1"] [data-testid="sent-message"] span {
+  color: #d4ebff !important;
+}
+
 /* Account and chat tab labels hardcode the light near-black. */
 html[data-olxd="1"] [data-testid="tabs-myaccount"] span,
 html[data-olxd="1"] [data-testid="tabs-myaccount"] a,
@@ -322,6 +343,14 @@ html[data-olxd="1"] [data-button-variant="primary"][data-button-disabled="true"]
   color: var(--color-foreground-disabled) !important;
 }
 
+/* Checkbox labels come from the design system's `n-checkbox-label` component
+   (a stable component class, not a generated hash). It hardcodes the light
+   theme's dark teal, which is invisible on the dark bulk-actions bar behind
+   "Selecionar todos" on the finished-ads page. */
+html[data-olxd="1"] .n-checkbox-label-label {
+  color: var(--olxd-text) !important;
+}
+
 /* ---- Favourites page (/observed) --------------------------------------
    A legacy emotion page: a white header band, a #F2F4F5 toolbar strip and
    white button groups, all four levels deep inside the page container. The
@@ -360,6 +389,19 @@ html[data-olxd="1"] [data-testid="posting-fields-desktop-entry-point"] {
   background-color: var(--olxd-page) !important;
 }
 
+/* The category suggestion card hardcodes the light theme's peach fill. */
+html[data-olxd="1"] [data-testid="posting-select-category"] [role="button"] {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+  border-color: var(--olxd-line) !important;
+}
+
+/* The "Vender / Troca" segmented control labels itself with the
+   background-inverse token — another instance of the dual-use trap. */
+html[data-olxd="1"] [data-testid="parameters-field-widget"] button[data-selected] > div {
+  color: var(--olxd-text) !important;
+}
+
 /* ---- Purchase micro-frontend ------------------------------------------
    Wallet top-up: the amount choices take their text colour from the light
    theme's on-photo ink, and the outline is a light grey. */
@@ -376,6 +418,137 @@ html[data-olxd="1"] [data-testid^="wallet-topup-variant"] > div {
    token as its text colour — the dual-use trap. */
 html[data-olxd="1"] [data-testid="purchase-mf-container"] h4 > div:first-child {
   color: var(--olxd-text) !important;
+}
+
+/* ---- Landing bundles (/landingbundles) --------------------------------
+   The legacy "Destaques de anúncios" marketing page predates the token layer.
+   It paints its own white, mint and periwinkle panels and uses semantic BEM
+   class names, which are stable hooks. Its header is the old dark-teal bar
+   with the wordmark drawn in text. */
+html[data-olxd="1"] .navi {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] #headerLogo {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] #postNewAdLink {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-on-accent) !important;
+}
+
+/* The "Novo!" pill sits on the mint accent but hardcodes white text, which
+   reads at 1.3:1. It takes the accent's dark ink instead. */
+html[data-olxd="1"] .badge-new {
+  color: var(--olxd-on-accent) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-intro__content {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-intro__content h2 {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-options-intro h3,
+html[data-olxd="1"] .lp-bundles-options h3,
+html[data-olxd="1"] .lp-bundles-about h3,
+html[data-olxd="1"] .lp-bundles-about strong {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-options-intro__box {
+  background-color: var(--olxd-surface) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .bundle-item {
+  background-color: var(--olxd-surface) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .bundle-item h4 {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .bundles-about {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] .bundles-about__img {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-olxd="1"] .bundles-about h4 {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .bundles-tabs__link {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .bundles-tabs__link.is-selected {
+  color: var(--olxd-accent) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-promote li {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .lp-bundles-promote h5 {
+  color: var(--olxd-text) !important;
+}
+
+/* The legacy footer under this page uses its own link classes and headings. */
+html[data-olxd="1"] #footer-container a {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] #footer-container a span {
+  color: inherit !important;
+}
+
+html[data-olxd="1"] #footer-container .websitegray {
+  color: var(--olxd-text-muted) !important;
+}
+
+html[data-olxd="1"] .footerexternals__headline {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* The legacy header's account dropdown opens as a white panel. */
+html[data-olxd="1"] .userbox-dd {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] .userbox-dd a,
+html[data-olxd="1"] .userbox-dd a span {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .userbox-dd h5,
+html[data-olxd="1"] .userbox-dd i {
+  color: var(--olxd-text-muted) !important;
+}
+
+/* ---- Error page -------------------------------------------------------
+   The 404 shell ("Houston, temos um problema!") is a standalone legacy page
+   under `c-wrapper` / `c-container` that paints a cream canvas and a dark-teal
+   button, neither of which goes through the token layer. */
+html[data-olxd="1"] .c-wrapper {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] .c-container__description {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] .c-wrapper .button {
+  background-color: var(--olxd-accent) !important;
+  color: var(--olxd-on-accent) !important;
 }
 
 /* ---- Tables & dividers ------------------------------------------------ */
