@@ -106,7 +106,9 @@ html[data-svd="1"] #__next {
 
   --color-foreground-primary: #ffffff;
   --color-foreground-secondary: #afb4b6;
-  --color-foreground-disabled: #63686b;
+  /* #7a7a7a keeps disabled labels above 3:1 on --color-background-disabled
+     (#2a2c2e); the earlier #63686b landed at 2.5:1 there. */
+  --color-foreground-disabled: #7a7a7a;
   --color-foreground-placeholder: #71777a;
   --color-foreground-accent: #94c9ff;
   --color-foreground-action-primary: #94c9ff;
@@ -185,7 +187,9 @@ html[data-svd="1"] #__next {
 
   --colorsForegroundPrimary: #ffffff;
   --colorsForegroundSecondary: #afb4b6;
-  --colorsForegroundDisabled: #63686b;
+  /* Kept in step with the kebab-case token above: disabled CTAs consume this
+     one on --color-background-disabled (#2a2c2e). */
+  --colorsForegroundDisabled: #7a7a7a;
   --colorsForegroundPlaceholder: #71777a;
   --colorsForegroundAccent: #94c9ff;
   --colorsForegroundActionPrimary: #94c9ff;
@@ -250,7 +254,7 @@ html[data-svd="1"] #__next {
   --color-turbo-content-accent: #94c9ff;
   --color-turbo-content-accent-muted: #d4ebff;
   --color-turbo-content-default: #fff;
-  --color-turbo-content-default-disabled: #63686b;
+  --color-turbo-content-default-disabled: #7a7a7a;
   --color-turbo-content-error: #ffcac3;
   --color-turbo-content-inverse: #111213;
   --color-turbo-content-inverse-disabled: #111213cc;
