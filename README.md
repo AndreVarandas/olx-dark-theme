@@ -1,8 +1,9 @@
 # OLX & Standvirtual Dark
 
-A true-black dark theme for [olx.pt](https://www.olx.pt) and
-[standvirtual.com](https://www.standvirtual.com). One toolbar button turns it on and off
-for both sites.
+A dark theme for [olx.pt](https://www.olx.pt) and
+[standvirtual.com](https://www.standvirtual.com), with an OLED-black palette on OLX and
+the sites' own dark palette on Standvirtual. One toolbar button turns it on and off for
+both.
 
 Both sites are built on the same OLX Group design system, so the theme works the same way
 on each: it overrides the design tokens rather than inverting colours, so components keep
@@ -10,11 +11,19 @@ their layout, hierarchy and brand accent — only the palette changes.
 
 ## Install
 
-1. Open `chrome://extensions`
-2. Turn on **Developer mode**
-3. **Load unpacked** → select this folder
+**From a release** (no git needed):
 
-The theme is on by default. Click the toolbar icon to toggle it; the badge shows `ON` / `OFF`.
+1. Download [`olx-dark-theme.zip`](https://github.com/AndreVarandas/olx-dark-theme/releases/latest/download/olx-dark-theme.zip)
+   and unzip it
+2. Open `chrome://extensions`
+3. Turn on **Developer mode**
+4. **Load unpacked** → select the unzipped folder
+
+Or clone this repo and **Load unpacked** on the repo folder instead — it is the
+dependency-free source, no build step.
+
+Either way the theme is on by default. Click the toolbar icon to toggle it; the badge
+shows `ON` / `OFF`.
 
 ## Permissions
 
@@ -114,11 +123,16 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
   extension CSS can reach, so they are dimmed to 80% brightness on OLX and left otherwise
   intact. Empty slots are replaced with a dark surface. Install an ad blocker if they still
   glare.
-- **Pages not yet audited.** On OLX: home, category listings, search results and ad detail
-  pages were tuned against the live site; the login flow, "A tua conta", the chat and the
-  ad-publishing form were not. On Standvirtual: home, listings, ad detail, the sell landing
-  page and the login app were audited; account, messages and the ad-publishing form were
-  not. If a panel there still looks light, add a patch keyed to its `data-testid`.
+- **Pages not yet audited.** Nearly everything on both sites has been tuned against the
+  live apps — including the OLX account area ("A tua conta", payments, settings, wallet,
+  package purchases), the chat, favourites, saved searches and the ad-publishing form, and
+  on Standvirtual the account shell, the login app, `/diarioautomovel` and the legacy
+  pages. What remains: the OLX login flow, and the Standvirtual publishing wizard behind
+  the `/carros/anunciar` entry form (reaching it means creating a real listing). If a
+  panel still looks light, add a patch keyed to its `data-testid`.
+- **Deliberately out of scope:** `business.olx.pt`, `help.olx.pt`,
+  `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer subdomains — they
+  sit outside the six-origin allowlist, so the theme never touches them.
 - **Both sites ship new tokens over time.** A broken theme is usually a renamed variable,
   found by diffing `getComputedStyle(document.body)` for `--*color*`.
 
@@ -128,4 +142,9 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
 python3 tools/make-icons.py
 ```
 
-No dependencies. Photos and ad creatives are never filtered, dimmed or inverted.
+No dependencies; it rewrites `icons/icon-{16,32,48,128}.png`. Listing photos are never
+filtered, dimmed or inverted — only third-party ad creatives, as noted above.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
