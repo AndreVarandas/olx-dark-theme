@@ -1,6 +1,6 @@
 # OLX & Standvirtual Dark
 
-A dark theme for [olx.pt](https://www.olx.pt) and
+An unofficial dark theme for [olx.pt](https://www.olx.pt) and
 [standvirtual.com](https://www.standvirtual.com), with an OLED-black palette on OLX and
 the sites' own dark palette on Standvirtual. One toolbar button turns it on and off for
 both.
@@ -8,6 +8,14 @@ both.
 Both sites are built on the same OLX Group design system, so the theme works the same way
 on each: it overrides the design tokens rather than inverting colours, so components keep
 their layout, hierarchy and brand accent — only the palette changes.
+
+### OLX.pt
+
+![The OLX.pt home page themed dark: black canvas, teal accent, category tiles and search bar](screenshots/olx-home.jpg)
+
+### Standvirtual.com
+
+![The standvirtual.com home page themed dark: near-black surfaces, brand-blue buttons, listing photos untouched](screenshots/standvirtual-home.jpg)
 
 ## Install
 
@@ -144,6 +152,17 @@ python3 tools/make-icons.py
 
 No dependencies; it rewrites `icons/icon-{16,32,48,128}.png`. Listing photos are never
 filtered, dimmed or inverted — only third-party ad creatives, as noted above.
+
+## Disclaimer
+
+This is an independent, unofficial project. It is not affiliated with, endorsed by or
+sponsored by OLX Group, eBay Classifieds Group or their affiliates. OLX and Standvirtual
+are trademarks of their respective owners and are used here only to identify the sites
+this theme restyles.
+
+The theme runs entirely inside your own browser: it injects CSS into pages you visit,
+stores nothing but the on/off preference (in your synced Chrome profile), and contacts no
+server of its own.
 
 ## License
 
