@@ -165,13 +165,27 @@ summary` line under ~72 chars, with a body explaining the why when it isn't obvi
 Keep `manifest.json`'s `version` and the git tag in step — release-please does the
 bumping for you. The baseline is `v0.2.0`.
 
-The automation lives in `.github/workflows/` and stays inert until the repo gains a
-GitHub remote: release-please keeps a release PR open (bumping `manifest.json`,
-writing `CHANGELOG.md`); merging it cuts the tag, the GitHub Release and two zips of
-the unpacked extension — one version-named, one stable-named so
-`releases/latest/download/olx-dark-theme.zip` never goes stale. Chrome Web Store upload is opt-in via the
-`PUBLISH_TO_WEB_STORE` repo variable plus `CWS_*` secrets. CI-plumbing commits are
-`ci:`/`chore:` so they do not consume a version bump.
+The automation lives in `.github/workflows/`: release-please keeps a release PR open
+(bumping `manifest.json`, writing `CHANGELOG.md`); merging it cuts the tag and the
+GitHub Release. Publishing is not chained automatically — release-please creates the
+release with the workflow token, and such events do not trigger further workflows —
+so run `publish.yml` for the tag. It validates, then attaches two zips of the
+unpacked extension (version-named, plus stable-named so
+`releases/latest/download/olx-dark-theme.zip` never goes stale), and is idempotent:
+
+```bash
+gh workflow run publish.yml -f tag=v0.2.1
+```
+
+Chrome Web Store upload is opt-in via the `PUBLISH_TO_WEB_STORE` repo variable plus
+`CWS_*` secrets. CI-plumbing commits are `ci:`/`chore:` so they do not consume a
+version bump.
+
+release-please config traps: it builds its path map **only** from the config's
+`packages` key — a flat config without `packages` is a silent no-op (green runs,
+nothing released). `release-type` must be a real strategy; there is no `chrome-ext`
+type — this repo uses `simple` plus a JSON extra-file that bumps `manifest.json`'s
+`$.version`.
 
 ## Things not to do
 
