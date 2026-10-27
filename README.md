@@ -11,9 +11,9 @@ Both sites are built on the same OLX Group design system, so the theme works the
 on each: it overrides the design tokens rather than inverting colours, so components keep
 their layout, hierarchy and brand accent — only the palette changes.
 
-### OLX.pt — cars listings
+### OLX.pt — ad detail
 
-![The OLX.pt cars listing themed dark: black canvas, dark listing cards with untouched photos, teal accents and TOP badges](screenshots/olx-cars.png)
+![An OLX.pt car ad themed dark: black canvas, header and search bar, the listing's photo gallery, price, teal call-to-action buttons and seller card](screenshots/olx-ad.png)
 
 ### Standvirtual.com — home
 
