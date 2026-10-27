@@ -1,0 +1,39 @@
+/* ==========================================================================
+   OLX Dark — mobile layout (m.olx.pt)
+   --------------------------------------------------------------------------
+   m.olx.pt serves the same React app in its mobile layout, under the same
+   design tokens, so tokens.css, theme.css and patches.css do the heavy
+   lifting under the usual flag. These rules cover only the pieces that
+   hardcode colours in the mobile chrome.
+   ========================================================================== */
+
+/* The mobile shell paints a white page layer directly under #hydrate-root. */
+html[data-olxd="1"] #hydrate-root > div {
+  background-color: var(--olxd-page) !important;
+}
+
+/* "Continua na app" install banner: a white sticky bar above the search
+   header. Its title is the only stable hook; the white box is the title's
+   grandparent, so :has() reaches it without matching the wrappers above. */
+html[data-olxd="1"] div:has(> div > [data-testid="app-install-banner-title"]) {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="app-install-banner-title"] {
+  color: var(--olxd-text) !important;
+}
+
+/* Photo placeholders behind each listing photo — the Swiper zoom layer paints
+   them a hardcoded light grey. Only visible where a photo is missing or has
+   not loaded, but it flashes on slow connections. */
+html[data-olxd="1"] .swiper-zoom-container > div {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* Bottom navigation: the bar's wrapper and grid paint white behind the dark
+   bar itself, which only shows through while it loads. */
+html[data-olxd="1"] [data-testid="bottom-bar-container"] > div,
+html[data-olxd="1"] [data-testid="bottom-bar-container"] > div > div {
+  background-color: var(--olxd-page) !important;
+}

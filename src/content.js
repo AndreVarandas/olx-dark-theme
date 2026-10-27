@@ -15,7 +15,7 @@
   // Exact hosts, mirroring manifest.json's host_permissions. Nothing else on
   // either domain is themed: help centres, blogs, static hosts and sibling
   // apps stay untouched. Keep this list and the manifest in step.
-  const OLX_HOSTS = ['olx.pt', 'www.olx.pt'];
+  const OLX_HOSTS = ['olx.pt', 'www.olx.pt', 'm.olx.pt'];
   const SV_HOSTS = [
     'standvirtual.com',
     'www.standvirtual.com',

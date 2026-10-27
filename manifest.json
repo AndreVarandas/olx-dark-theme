@@ -11,6 +11,7 @@
   "host_permissions": [
     "*://olx.pt/*",
     "*://www.olx.pt/*",
+    "*://m.olx.pt/*",
     "*://standvirtual.com/*",
     "*://www.standvirtual.com/*",
     "*://m.standvirtual.com/*",

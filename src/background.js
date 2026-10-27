@@ -13,6 +13,20 @@ const SITES = [
     js: ['src/content.js'],
   },
   {
+    // m.olx.pt is the same React app in its mobile layout — same tokens, same
+    // flag — plus the rules that cover its hardcoded mobile chrome.
+    id: 'olx-mobile-dark',
+    hosts: ['m.olx.pt'],
+    matches: ['*://m.olx.pt/*'],
+    css: [
+      'src/olx/tokens.css',
+      'src/olx/theme.css',
+      'src/olx/patches.css',
+      'src/olx/mobile.css',
+    ],
+    js: ['src/content.js'],
+  },
+  {
     id: 'sv-dark',
     hosts: ['standvirtual.com', 'www.standvirtual.com', 'm.standvirtual.com', 'login.standvirtual.com'],
     matches: [

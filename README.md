@@ -17,6 +17,10 @@ their layout, hierarchy and brand accent — only the palette changes.
 
 ![The standvirtual.com home page themed dark: near-black surfaces, brand-blue buttons, listing photos untouched](screenshots/standvirtual-home.png)
 
+### OLX.pt — mobile layout (`m.olx.pt`)
+
+![The OLX mobile listing themed dark: dark app-install banner, search bar, filter chips, cards and bottom navigation](screenshots/olx-mobile.png)
+
 ## Install
 
 **From a release** (no git needed):
@@ -35,15 +39,16 @@ shows `ON` / `OFF`.
 
 ## Permissions
 
-The extension runs on six exact origins and nothing else:
+The extension runs on seven exact origins and nothing else:
 
-- `olx.pt`, `www.olx.pt`
+- `olx.pt`, `www.olx.pt`, `m.olx.pt`
 - `standvirtual.com`, `www.standvirtual.com`, `m.standvirtual.com`, `login.standvirtual.com`
 
 Everything else on those domains — the help centres, blogs, static asset hosts and
-sibling apps such as `carros.standvirtual.com` — is out of reach. OLX serves a separate
-mobile template on `m.olx.pt`, which it redirects desktop browsers to below roughly a
-1280-px viewport; that template is a different app and is deliberately not themed.
+sibling apps such as `carros.standvirtual.com` — is out of reach. `m.olx.pt` matters
+because OLX redirects desktop browsers to it below roughly a 1024-px viewport; it serves
+the same React app in its mobile layout, under the same design tokens, so it gets the
+same palette plus a few rules for its hardcoded mobile chrome.
 
 It requests `storage` (the on/off preference) and `scripting` (registering the stylesheets
 while the theme is on). It does **not** request `tabs`, `webRequest`, `cookies` or
@@ -96,6 +101,7 @@ that hardcode their colours; `src/sv/patches.css` covers those with structural s
 | `src/olx/tokens.css` | OLX palette: light → OLED dark mapping for every semantic token |
 | `src/olx/theme.css`  | Canvas, default text colour, native controls, selection, focus  |
 | `src/olx/patches.css`| OLX components that hardcode colours                            |
+| `src/olx/mobile.css` | OLX mobile layout (`m.olx.pt`): hardcoded mobile chrome         |
 | `src/sv/tokens.css`  | Standvirtual palette: all four token layers                     |
 | `src/sv/theme.css`   | Canvas, native controls, selection, focus                       |
 | `src/sv/patches.css` | Standvirtual components that hardcode colours                   |
@@ -139,10 +145,13 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
   pages. What remains: the OLX login flow, and the Standvirtual publishing wizard behind
   the `/carros/anunciar` entry form (reaching it means creating a real listing). If a
   panel still looks light, add a patch keyed to its `data-testid`.
-- **Deliberately out of scope:** the OLX mobile site (`m.olx.pt`), `business.olx.pt`,
-  `help.olx.pt`, `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer
-  subdomains — they sit outside the six-origin allowlist, so the theme never touches
-  them.
+- **OLX mobile layout (`m.olx.pt`)** is newer than the rest: audited on the listing
+  pages, not yet across the account, chat or ad-detail screens. A few muted meta lines
+  sit at the site's own low-contrast grey by design; the borders that share that
+  primitive keep it, since brightening them would be worse than dim text.
+- **Deliberately out of scope:** `business.olx.pt`, `help.olx.pt`,
+  `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer subdomains — they
+  sit outside the seven-origin allowlist, so the theme never touches them.
 - **Both sites ship new tokens over time.** A broken theme is usually a renamed variable,
   found by diffing `getComputedStyle(document.body)` for `--*color*`.
 

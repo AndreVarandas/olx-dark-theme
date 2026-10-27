@@ -57,6 +57,16 @@ Three constraints are load-bearing and easy to break:
 3. **`html`/`body` are transparent** — the browser paints the white canvas. It must be set
    explicitly (`src/olx/theme.css`).
 
+`m.olx.pt` is not a separate app: below roughly a 1024-px viewport OLX redirects the
+desktop site to it, and it serves the same React app in its mobile layout under the same
+flag and the same tokens. It is its own `SITES` entry so it can append
+`src/olx/mobile.css`, which covers the hardcoded mobile chrome (the white page layer under
+`#hydrate-root`, the "Continua na app" install banner keyed on
+`data-testid="app-install-banner-title"`, the Swiper photo placeholders and the bottom
+navigation keyed on `data-testid="bottom-bar-container"`). Don't "fix" the muted meta
+text: `--primitivesColorsLightGray06Gray` (#406367) doubles as the border colour in ~130
+places, so raising it for contrast would brighten every hairline.
+
 ### Standvirtual.com (`src/sv/`)
 
 Next.js (`#__next` instead of `#hydrate-root`) with **four** token layers, all overridden:
@@ -139,8 +149,10 @@ footer, ad slots, "A tua conta" (`/myaccount`), payment history, user settings,
 candidate profile, the chat list plus a conversation thread, favourites
 (`/favoritos/*`, rendered by the `observed-page` component), saved searches, the
 package-purchase flow (`/purchase/packages/*`) and wallet top-up, the ad-publishing
-form, the legacy `/landingbundles` marketing page, and the standalone 404 shell
-("Houston, temos um problema!"). Standvirtual: home, listing pages
+form, the legacy `/landingbundles` marketing page, the standalone 404 shell
+("Houston, temos um problema!"), and the mobile layout on `m.olx.pt` (listing pages
+only so far — the mobile account, chat and ad-detail screens are not audited).
+Standvirtual: home, listing pages
 (including the `/carros/<city|brand>` filter landings and the new-car catalogue),
 ad detail and the new-car store pages, the `/vender` landing page, the login app, the
 whole account shell (`/contapessoal/active|waiting|messages|newinvoices|preferences`),
@@ -203,7 +215,7 @@ type — this repo uses `simple` plus a JSON extra-file that bumps `manifest.jso
   brightness on OLX, because they render in cross-origin iframes no CSS can reach); empty
   ad slots are repainted.
 - Do not add a popup or options page. The product decision is one toolbar button, nothing else.
-- Do not widen `host_permissions` beyond the six exact origins in `manifest.json`. The
+- Do not widen `host_permissions` beyond the seven exact origins in `manifest.json`. The
   same allowlist is repeated in `background.js` (`SITES[].hosts`) and `content.js`; keep
   all three in step when adding a host. Never go back to `*://*.<domain>/*` — that would
   cover help centres, blogs and sibling apps the theme was not built for.
