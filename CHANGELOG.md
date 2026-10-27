@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.2...v0.2.3) (2026-10-27)
+
+
+### Bug Fixes
+
+* theme the mobile ad detail and the in-app 404 shell ([703b499](https://github.com/AndreVarandas/olx-dark-theme/commit/703b49907ed4af685e4c84ae6f8b5c0286ec173d))
+
 ## [0.2.2](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.1...v0.2.2) (2026-10-27)
 
 
