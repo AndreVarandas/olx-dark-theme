@@ -83,6 +83,16 @@ html[data-svd="1"] [data-testid="search-results"] article h2 a {
   color: var(--olxd-text) !important;
 }
 
+/* The same card component in the favourites app is not under `search-results`,
+   so it is matched by the data attributes the card carries instead. */
+html[data-svd="1"] article[data-media-size] > section {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] article[data-media-size] h2 a {
+  color: var(--olxd-text) !important;
+}
+
 /* Links to the help centre wrap a paragraph with its own dark colour. */
 html[data-svd="1"] a[href*="ajuda.standvirtual.com"] p {
   color: inherit !important;
@@ -109,6 +119,34 @@ html[data-svd="1"] [data-testid="search-results"] article button[color="green"] 
 
 /* Filter checkboxes inherit a hardcoded near-black label. */
 html[data-svd="1"] label:has(input[type="checkbox"]) span {
+  color: var(--olxd-text) !important;
+}
+
+/* Applied-filter chips (the "Novos" pill and friends) carry a stable data
+   attribute and fill with a pale blue that pairs with white text. The
+   "clear all" flat button next to them hardcodes the light theme's
+   near-black. */
+html[data-svd="1"] button[data-applied-filter-chip] {
+  background-color: #12325e !important;
+  color: #d4ebff !important;
+}
+
+html[data-svd="1"] button[data-clear-all-button] {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-svd="1"] button[data-clear-all-button] span {
+  color: inherit !important;
+}
+
+/* The new-car listings nest a manufacturer offer card inside the normal
+   result article; its upper band is a #F7F8FA well and its copy hardcodes the
+   near-black. */
+html[data-svd="1"] [data-testid="search-results"] article article > div:first-child {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-svd="1"] [data-testid="search-results"] article article p {
   color: var(--olxd-text) !important;
 }
 
@@ -169,6 +207,128 @@ html[data-svd="1"] [class*="bg-[#c4e5f3]"] {
   color: #d4ebff !important;
 }
 
+/* ---- Account area (/contapessoal/*) ------------------------------------
+   The account shell is the older emotion layout: a #F7F8FA band holds the
+   page title, the credit balance and the tab strip, all painted with hardcoded
+   light fills. The title span's id varies per section
+   (`ads-management-title-heading`, `usermenu-header-messages-heading`, even
+   `Your payments-heading`), but always ends in "-heading", so that is the
+   stable hook. The selected tab's brand blue is a generated emotion class with
+   no stable equivalent; the tabs are therefore repainted uniformly as chips,
+   and the page title carries the "where am I" cue instead. */
+html[data-svd="1"] section:has(h2 > span[id$="-heading"]) {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] section:has(h2 > span[id$="-heading"]) a {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] section:has(h2 > span[id$="-heading"]) a span {
+  color: inherit !important;
+}
+
+/* Data tables (payments, invoices). The header cells are hardcoded white and
+   their labels light grey; the body cells hardcode the light theme's
+   near-black text on what is now a dark token surface. */
+html[data-svd="1"] [data-testid="data-table-header"] > div {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-svd="1"] [data-testid="data-table-header"] p {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-svd="1"] [data-testid="desktop-datatable"] .datatable-row p {
+  color: var(--olxd-text) !important;
+}
+
+/* Status chip: a mint `bg-green-primary` fill with `text-foreground-on-inverse`
+   (white). White on the mint is 2.3:1, so the label flips to the dark green
+   the site already uses for text on green. */
+html[data-svd="1"] [class~="bg-green-primary"] {
+  color: #052422 !important;
+}
+
+/* ---- Blog (/diarioautomovel) -------------------------------------------
+   The editorial site under /diarioautomovel is a separate app with its own
+   palette: bands painted #F9FAFB, white article cards, near-black headlines,
+   and swiper controls from a light stylesheet. Its markup uses CSS-module hashes, so
+   these rules lean on the structural hooks it does expose: main#content,
+   article elements, the data-has-background attribute on the bands, and the
+   swiper library's own class names. */
+html[data-svd="1"] main#content section[data-has-background] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] main#content article > a {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] main#content article h3,
+html[data-svd="1"] main#content article h4 {
+  color: var(--olxd-text) !important;
+}
+
+/* The video tabs hardcode the light theme's near-black on their list items. */
+html[data-svd="1"] main#content li {
+  color: inherit !important;
+}
+
+html[data-svd="1"] main#content .swiper-button-prev,
+html[data-svd="1"] main#content .swiper-button-next {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] main#content .swiper-pagination-progressbar {
+  background-color: var(--olxd-line-strong) !important;
+}
+
+html[data-svd="1"] main#content .swiper-pagination-progressbar-fill {
+  background-color: var(--olxd-accent) !important;
+}
+
+html[data-svd="1"] main#content a.btn-secondary {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* Article pages use a second, Tailwind-style utility set whose colour names
+   compile to literal whites and near-blacks (bg-bgWhite, text-textDefault,
+   border-borderDefault). The class names are source, not hashes, so they are
+   matched directly. */
+html[data-svd="1"] header [class~="bg-bgWhite"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] [class~="bg-bgWhite"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] [class~="text-textDefault"] {
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] [class~="border-borderDefault"],
+html[data-svd="1"] [class~="border-borderWeak"] {
+  border-color: var(--olxd-line-strong) !important;
+}
+
+/* Author byline box (#F4F4F4). Its only stable hook is the data-variant
+   attribute the component forwards. */
+html[data-svd="1"] main#content div[data-variant] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+/* The blog's base stylesheet hardcodes a near-black on bare anchors, which is
+   what the byline and the related-article links inherit. Anchors that carry a
+   text-colour utility are left alone so brand links keep their colour. */
+html[data-svd="1"] main#content a:not([class*="text-"]) {
+  color: var(--olxd-text) !important;
+}
+
 /* ---- Ad detail --------------------------------------------------------
    Photo thumbs and the service tiles are hardcoded #EBECEF wells. */
 html[data-svd="1"] [data-testid="photo-gallery"],
@@ -224,6 +384,51 @@ html[data-svd="1"] .login-page label,
 html[data-svd="1"] .login-page p,
 html[data-svd="1"] .login-page [or-separator],
 html[data-svd="1"] .login-page nav[data-testid="desktop-header"] a span {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Legacy pages (body.carspt) ---------------------------------------
+   /sitemap and the other pre-React pages ship under `body.carspt` with the
+   old BEM classes: `.header-container`, `.page-top`, `.helpinfo`,
+   `.footer-container`. Their whole palette is the #002539 navy, which turns
+   into dark-on-dark once the surfaces are flipped, so text is repainted at
+   the container level. */
+html[data-svd="1"] body.carspt header.header-container,
+html[data-svd="1"] body.carspt footer.footer-container,
+html[data-svd="1"] body.carspt .page-top {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] body.carspt .helpinfo {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] body.carspt #siteWrap a,
+html[data-svd="1"] body.carspt #siteWrap h1,
+html[data-svd="1"] body.carspt #siteWrap h2,
+html[data-svd="1"] body.carspt #siteWrap h3,
+html[data-svd="1"] body.carspt #siteWrap h4,
+html[data-svd="1"] body.carspt #siteWrap h5,
+html[data-svd="1"] body.carspt #siteWrap .cat-label,
+html[data-svd="1"] body.carspt #siteWrap .category-label {
+  color: var(--olxd-text) !important;
+}
+
+/* ---- Publish flow (/carros/anunciar) ----------------------------------
+   The photo drop zone's drag overlay is an arbitrary 80%-white utility that
+   sits on top of the form, so it is repainted as a dark scrim. The character
+   counter chip fills with the neutral notification token and pairs it with
+   `text-foreground-on-light`, which is near-black — dark-on-dark once the
+   chip itself is themed. */
+html[data-svd="1"] [class*="bg-[rgba(255,255,255,0.8)]"] {
+  background-color: #111213e6 !important;
+}
+
+html[data-svd="1"] [class*="bg-[rgba(255,255,255,0.8)]"] * {
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] [class~="bg-background-brand-notification-neutral"] {
   color: var(--olxd-text) !important;
 }
 
