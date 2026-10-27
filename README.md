@@ -142,16 +142,20 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
   live apps — including the OLX account area ("A tua conta", payments, settings, wallet,
   package purchases), the chat, favourites, saved searches and the ad-publishing form, and
   on Standvirtual the account shell, the login app, `/diarioautomovel` and the legacy
-  pages. What remains: the OLX login flow, and the Standvirtual publishing wizard behind
-  the `/carros/anunciar` entry form (reaching it means creating a real listing). If a
-  panel still looks light, add a patch keyed to its `data-testid`.
+  pages. What remains: the Standvirtual publishing wizard past its entry step (it will
+  not advance without a real plate number or photos), and the OLX mobile account and
+  chat screens (they need a narrow viewport and a signed-in session at the same time,
+  which the audit harness cannot produce). If a panel still looks light, add a patch
+  keyed to its `data-testid`.
 - **OLX mobile layout (`m.olx.pt`)** is newer than the rest: audited on the listing
-  pages, not yet across the account, chat or ad-detail screens. A few muted meta lines
-  sit at the site's own low-contrast grey by design; the borders that share that
+  pages and the ad detail, not yet across the account or chat screens. A few muted meta
+  lines sit at the site's own low-contrast grey by design; the borders that share that
   primitive keep it, since brightening them would be worse than dim text.
-- **Deliberately out of scope:** `business.olx.pt`, `help.olx.pt`,
+- **Deliberately out of scope:** `business.olx.pt`, `help.olx.pt`, `login.olx.pt`,
   `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer subdomains — they
-  sit outside the seven-origin allowlist, so the theme never touches them.
+  sit outside the seven-origin allowlist, so the theme never touches them. The OLX sign-in
+  flow is served by `login.olx.pt`, so that page stays light; Standvirtual's login app is
+  on its own allowlisted host and is themed.
 - **Both sites ship new tokens over time.** A broken theme is usually a renamed variable,
   found by diffing `getComputedStyle(document.body)` for `--*color*`.
 

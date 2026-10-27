@@ -37,3 +37,34 @@ html[data-olxd="1"] [data-testid="bottom-bar-container"] > div,
 html[data-olxd="1"] [data-testid="bottom-bar-container"] > div > div {
   background-color: var(--olxd-page) !important;
 }
+
+/* Ad detail — sticky header. Once the page scrolls its background layer turns
+   opaque white; the icons themselves already follow --olxd-text. The layer is
+   identified by a leaked `visibility` attribute (a scroll-progress value) in
+   place of a class. */
+html[data-olxd="1"] main[data-testid="ad-component"] > section:first-of-type > div[visibility] {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Ad detail — the seller's other ads and the related-ads band hardcode a light
+   grey. The desktop layout paints both from tokens; only the mobile classes
+   don't. */
+html[data-olxd="1"] [data-cy="seller-other-ads"],
+html[data-olxd="1"] [data-testid="ad-recommendations"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-olxd="1"] [data-cy="seller-other-ads"] a {
+  color: var(--olxd-accent) !important;
+}
+
+/* Ad detail — the vehicle-history partner block and the "Ler mais" control
+   hardcode the brand teal (#02282C) as a text colour, which is near-black on
+   the canvas. */
+html[data-olxd="1"] [data-testid="ad-description-section"] p {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="show-more-button-wrapper"] button {
+  color: var(--olxd-accent) !important;
+}

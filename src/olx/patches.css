@@ -551,6 +551,18 @@ html[data-olxd="1"] .c-wrapper .button {
   color: var(--olxd-on-accent) !important;
 }
 
+/* A second 404 shell — reached for in-app misses such as `/login/` while
+   signed in — renders the modern header around a legacy `page404` block whose
+   heading and category links hardcode the brand teal (#002F34), which is
+   near-black on our canvas. */
+html[data-olxd="1"] .page404 h4 {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] .page404 a {
+  color: var(--olxd-accent) !important;
+}
+
 /* ---- Tables & dividers ------------------------------------------------ */
 html[data-olxd="1"] hr {
   border-color: var(--olxd-line) !important;

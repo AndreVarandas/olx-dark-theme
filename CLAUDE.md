@@ -63,7 +63,12 @@ flag and the same tokens. It is its own `SITES` entry so it can append
 `src/olx/mobile.css`, which covers the hardcoded mobile chrome (the white page layer under
 `#hydrate-root`, the "Continua na app" install banner keyed on
 `data-testid="app-install-banner-title"`, the Swiper photo placeholders and the bottom
-navigation keyed on `data-testid="bottom-bar-container"`). Don't "fix" the muted meta
+navigation keyed on `data-testid="bottom-bar-container"`), plus the mobile ad detail (the
+sticky header's background layer — a `<div>` that carries a leaked `visibility` attribute,
+a scroll-progress value, instead of a class —, the `data-cy="seller-other-ads"` and
+`data-testid="ad-recommendations"` bands, and the dark-teal partner text inside
+`data-testid="ad-description-section"`). The desktop layout paints those bands from
+tokens, so those rules must stay in `mobile.css`. Don't "fix" the muted meta
 text: `--primitivesColorsLightGray06Gray` (#406367) doubles as the border colour in ~130
 places, so raising it for contrast would brighten every hairline.
 
@@ -107,7 +112,7 @@ instead of using tokens. Match on stable hooks — `data-testid` (Standvirtual e
 `search-results`, `page-header`, `banner-link`, `photo-gallery-item`, `main-services`,
 `price-drop-savings-badge`, `motors-layout`, `desktop-header`, `tabs`; OLX: `main`, `aside`,
 `seller_card`, `l-card`, `qa-advert-slot`, `home-page`, `search-submit`,
-`post-new-ad-button`), ids, element type, or arbitrary Tailwind values such as
+`post-new-ad-button`; OLX mobile adds `data-cy="seller-other-ads"`), ids, element type, or arbitrary Tailwind values such as
 `[class*="bg-[#E0F0FF]"]` (those are source code, not generated hashes). Standvirtual
 also forwards stable attributes as hooks — `data-applied-filter-chip`,
 `data-clear-all-button`, `data-testid="data-table-header"` / `"desktop-datatable"`,
@@ -149,9 +154,12 @@ footer, ad slots, "A tua conta" (`/myaccount`), payment history, user settings,
 candidate profile, the chat list plus a conversation thread, favourites
 (`/favoritos/*`, rendered by the `observed-page` component), saved searches, the
 package-purchase flow (`/purchase/packages/*`) and wallet top-up, the ad-publishing
-form, the legacy `/landingbundles` marketing page, the standalone 404 shell
-("Houston, temos um problema!"), and the mobile layout on `m.olx.pt` (listing pages
-only so far — the mobile account, chat and ad-detail screens are not audited).
+form, the legacy `/landingbundles` marketing page, both 404 shells (the standalone
+"Houston, temos um problema!" page and the in-app one reached for misses such as
+`/login/`, which renders the modern header around a legacy `.page404` block), and the
+mobile layout on `m.olx.pt` (listing pages and ad detail — the mobile account and chat
+screens are not audited: they need a narrow viewport and a session at once). The OLX
+sign-in flow is served by `login.olx.pt`, outside the allowlist, so it is not themed.
 Standvirtual: home, listing pages
 (including the `/carros/<city|brand>` filter landings and the new-car catalogue),
 ad detail and the new-car store pages, the `/vender` landing page, the login app, the
@@ -162,7 +170,9 @@ favourites, saved searches, `/avaliacao-do-carro`, the editorial site
 
 Deliberately out of scope, because they are outside the allowlist: `business.olx.pt`
 (the "Pacotes de anúncios" footer link redirects there — a separate WordPress site),
-`help.olx.pt`, and on the Standvirtual side `ajuda.standvirtual.com` (the Cookies
+`help.olx.pt`, `login.olx.pt` (the OAuth sign-in app — the account screens redirect
+there when signed out; Standvirtual's login app is on its own allowlisted host and is
+themed), and on the Standvirtual side `ajuda.standvirtual.com` (the Cookies
 footer link redirects there), `carros.standvirtual.com` (the check-up service) and the
 `*.standvirtual.com` dealer subdomains. Not yet audited: OLX login, and the Standvirtual
 publishing wizard behind the entry form (reaching it means creating a real listing).
