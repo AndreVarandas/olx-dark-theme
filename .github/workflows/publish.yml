@@ -34,13 +34,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Zip the unpacked extension
-        # git ls-files keeps the archive to exactly the tracked, shippable
-        # files — no .git/.github dot-dirs, no local strays.
+        # Only the runtime files go into the archive: manifest, icons and
+        # scripts/styles. Repo scaffolding (workflows, docs, configs) stays
+        # out, so the zip is exactly what Chrome loads and what a store
+        # upload expects.
         run: |
-          git ls-files | zip -q "olx-dark-theme-${GITHUB_REF_NAME}.zip" -@
+          zip -q -r "olx-dark-theme-${GITHUB_REF_NAME}.zip" manifest.json icons src
           # The stable name gives a permanent link:
           # github.com/OWNER/REPO/releases/latest/download/olx-dark-theme.zip
-          git ls-files | zip -q olx-dark-theme.zip -@
+          zip -q -r olx-dark-theme.zip manifest.json icons src
       - name: Attach the zips to the Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -65,7 +67,7 @@ jobs:
         with:
           node-version: 22
       - name: Zip the unpacked extension
-        run: git ls-files | zip -q extension.zip -@
+        run: zip -q -r extension.zip manifest.json icons src
       - name: Upload draft to the Chrome Web Store
         env:
           EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
