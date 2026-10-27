@@ -1,7 +1,10 @@
-# Fires when release-please publishes a GitHub Release (i.e. its release PR
-# was merged). Validates the sources with the checks documented in CLAUDE.md,
-# then attaches a zip of the unpacked extension to the Release. The web-store
-# job is opt-in (see the comment on it).
+# Publishes a release: validates the sources with the checks documented in
+# CLAUDE.md, then attaches two zips of the unpacked extension to the Release.
+# This does NOT run automatically after release-please — its release is created
+# with the workflow token, and GitHub does not chain workflows off such events —
+# so dispatch it for the tag explicitly (see the trigger below). The
+# `release: published` trigger only covers a release published by hand.
+# The web-store job is opt-in (see the comment on it).
 name: publish
 
 on:
@@ -72,7 +75,7 @@ jobs:
     # (one-time $5), create the item once by hand, then add the repo secrets
     # CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET, CWS_REFRESH_TOKEN
     # and set the repo variable PUBLISH_TO_WEB_STORE=true. Without the
-    # variable this job never runs; with it, each release is uploaded to the
+    # variable this job never runs; with it, each publish run uploads to the
     # store as a draft for review. To fully auto-publish, add --auto-publish
     # to the upload command below.
     if: vars.PUBLISH_TO_WEB_STORE == 'true'

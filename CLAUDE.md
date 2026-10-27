@@ -160,8 +160,13 @@ publishing wizard behind the entry form (reaching it means creating a real listi
 The project targets semver, so commit messages must follow Conventional Commits:
 `fix:` → patch, `feat:` → minor, `feat!:` / `BREAKING CHANGE:` → major. This is what
 semver automation (release-please / semantic-release style, run CI-side — the repo
-stays dependency-free) derives versions from. Use an English `type: imperative
-summary` line under ~72 chars, with a body explaining the why when it isn't obvious.
+stays dependency-free) derives versions from. **Below 1.0.0 the config enables
+`bump-minor-pre-major` and `bump-patch-for-minor-pre-major`**, so today the arithmetic
+is `fix:`/`feat:` → patch (0.2.1 → 0.2.2) and `feat!:`/`BREAKING CHANGE:` → minor
+(0.2.1 → 0.3.0); the major bump starts only once the version reaches 1.0.0. Keep
+writing `feat!:` for a break regardless — it is what earns the minor bump and records
+the break in the changelog. Use an English `type: imperative summary` line under ~72
+chars, with a body explaining the why when it isn't obvious.
 Keep `manifest.json`'s `version` and the git tag in step — release-please does the
 bumping for you. The baseline is `v0.2.0`.
 
@@ -169,16 +174,21 @@ The automation lives in `.github/workflows/`: release-please keeps a release PR 
 (bumping `manifest.json`, writing `CHANGELOG.md`); merging it cuts the tag and the
 GitHub Release. Publishing is not chained automatically — release-please creates the
 release with the workflow token, and such events do not trigger further workflows —
-so run `publish.yml` for the tag. It validates, then attaches two zips of the
-unpacked extension (version-named, plus stable-named so
-`releases/latest/download/olx-dark-theme.zip` never goes stale), and is idempotent:
+so run `publish.yml` for the tag. The tag must already have a GitHub Release — the
+workflow uploads to it and does not create one. It validates, then attaches two zips
+of the unpacked extension (version-named, plus stable-named so
+`releases/latest/download/olx-dark-theme.zip` never goes stale). The release assets
+are uploaded with `--clobber`, so re-running for a tag is safe; the opt-in web-store
+job, however, re-uploads whenever it runs:
 
 ```bash
-gh workflow run publish.yml -f tag=v0.2.1
+TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+gh workflow run publish.yml -f tag="$TAG"
 ```
 
 Chrome Web Store upload is opt-in via the `PUBLISH_TO_WEB_STORE` repo variable plus
-`CWS_*` secrets. CI-plumbing commits are `ci:`/`chore:` so they do not consume a
+`CWS_*` secrets; the store item itself must be created once by hand (see
+`publish.yml`). CI-plumbing commits are `ci:`/`chore:` so they do not consume a
 version bump.
 
 release-please config traps: it builds its path map **only** from the config's
