@@ -105,7 +105,10 @@ also forwards stable attributes as hooks — `data-applied-filter-chip`,
 utility classes such as `bg-bgWhite`, `text-textDefault` and `border-borderDefault`.
 The legacy pages (e.g. `/sitemap`) are plain BEM under `body.carspt` (`.page-top`,
 `.helpinfo`, `#siteWrap`), and the account shell is keyed on a section whose `h2 > span`
-id ends in `-heading`.
+id ends in `-heading`. OLX's design-system components also expose stable class names
+(`n-checkbox-label-label`, `n-textinput-layout`), the legacy 404 shell is `.c-wrapper` /
+`.c-container`, and `/landingbundles` is plain BEM (`.badge-new`, `.bundle-item`,
+`.lp-bundles-*`).
 
 **Never match generated emotion / CSS-module classes** like `.css-1ek5um8`, `.ooa-ljs66p`,
 `.css-16c4qoj` or `.CJYm8`; they change on every deploy.
@@ -136,7 +139,8 @@ footer, ad slots, "A tua conta" (`/myaccount`), payment history, user settings,
 candidate profile, the chat list plus a conversation thread, favourites
 (`/favoritos/*`, rendered by the `observed-page` component), saved searches, the
 package-purchase flow (`/purchase/packages/*`) and wallet top-up, the ad-publishing
-form, and the legacy `/landingbundles` marketing page. Standvirtual: home, listing pages
+form, the legacy `/landingbundles` marketing page, and the standalone 404 shell
+("Houston, temos um problema!"). Standvirtual: home, listing pages
 (including the `/carros/<city|brand>` filter landings and the new-car catalogue),
 ad detail and the new-car store pages, the `/vender` landing page, the login app, the
 whole account shell (`/contapessoal/active|waiting|messages|newinvoices|preferences`),
