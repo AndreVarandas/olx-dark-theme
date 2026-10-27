@@ -36,11 +36,17 @@ jobs:
       - name: Zip the unpacked extension
         # git ls-files keeps the archive to exactly the tracked, shippable
         # files — no .git/.github dot-dirs, no local strays.
-        run: git ls-files | zip -q "olx-dark-theme-${GITHUB_REF_NAME}.zip" -@
-      - name: Attach the zip to the Release
+        run: |
+          git ls-files | zip -q "olx-dark-theme-${GITHUB_REF_NAME}.zip" -@
+          # The stable name gives a permanent link:
+          # github.com/OWNER/REPO/releases/latest/download/olx-dark-theme.zip
+          git ls-files | zip -q olx-dark-theme.zip -@
+      - name: Attach the zips to the Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$GITHUB_REF_NAME" "olx-dark-theme-${GITHUB_REF_NAME}.zip"
+        run: >-
+          gh release upload --clobber "$GITHUB_REF_NAME"
+          "olx-dark-theme-${GITHUB_REF_NAME}.zip" olx-dark-theme.zip
 
   web-store:
     # Opt-in. To turn on: register on the Chrome Web Store developer console

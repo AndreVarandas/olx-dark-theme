@@ -98,7 +98,14 @@ instead of using tokens. Match on stable hooks — `data-testid` (Standvirtual e
 `price-drop-savings-badge`, `motors-layout`, `desktop-header`, `tabs`; OLX: `main`, `aside`,
 `seller_card`, `l-card`, `qa-advert-slot`, `home-page`, `search-submit`,
 `post-new-ad-button`), ids, element type, or arbitrary Tailwind values such as
-`[class*="bg-[#E0F0FF]"]` (those are source code, not generated hashes).
+`[class*="bg-[#E0F0FF]"]` (those are source code, not generated hashes). Standvirtual
+also forwards stable attributes as hooks — `data-applied-filter-chip`,
+`data-clear-all-button`, `data-testid="data-table-header"` / `"desktop-datatable"`,
+`data-has-background`, `data-variant` — and its editorial app uses Tailwind-style
+utility classes such as `bg-bgWhite`, `text-textDefault` and `border-borderDefault`.
+The legacy pages (e.g. `/sitemap`) are plain BEM under `body.carspt` (`.page-top`,
+`.helpinfo`, `#siteWrap`), and the account shell is keyed on a section whose `h2 > span`
+id ends in `-heading`.
 
 **Never match generated emotion / CSS-module classes** like `.css-1ek5um8`, `.ooa-ljs66p`,
 `.css-16c4qoj` or `.CJYm8`; they change on every deploy.
@@ -129,13 +136,20 @@ footer, ad slots, "A tua conta" (`/myaccount`), payment history, user settings,
 candidate profile, the chat list plus a conversation thread, favourites
 (`/favoritos/*`, rendered by the `observed-page` component), saved searches, the
 package-purchase flow (`/purchase/packages/*`) and wallet top-up, the ad-publishing
-form, and the legacy `/landingbundles` marketing page. Standvirtual: home, listing
-pages, ad detail, the `/vender` landing page and the login app.
+form, and the legacy `/landingbundles` marketing page. Standvirtual: home, listing pages
+(including the `/carros/<city|brand>` filter landings and the new-car catalogue),
+ad detail and the new-car store pages, the `/vender` landing page, the login app, the
+whole account shell (`/contapessoal/active|waiting|messages|newinvoices|preferences`),
+favourites, saved searches, `/avaliacao-do-carro`, the editorial site
+(`/diarioautomovel` index and articles), `/sitemap`, and the publishing entry form
+(`/carros/anunciar`).
 
-Two things are deliberately out of scope: `business.olx.pt` (the "Pacotes de anúncios"
-footer link redirects there — a separate WordPress site, not in the allowlist) and
-`help.olx.pt`. Not yet audited: OLX login, and Standvirtual account, messages and the
-ad-publishing form.
+Deliberately out of scope, because they are outside the allowlist: `business.olx.pt`
+(the "Pacotes de anúncios" footer link redirects there — a separate WordPress site),
+`help.olx.pt`, and on the Standvirtual side `ajuda.standvirtual.com` (the Cookies
+footer link redirects there), `carros.standvirtual.com` (the check-up service) and the
+`*.standvirtual.com` dealer subdomains. Not yet audited: OLX login, and the Standvirtual
+publishing wizard behind the entry form (reaching it means creating a real listing).
 
 ## Commits and versions
 
@@ -149,8 +163,9 @@ bumping for you. The baseline is `v0.2.0`.
 
 The automation lives in `.github/workflows/` and stays inert until the repo gains a
 GitHub remote: release-please keeps a release PR open (bumping `manifest.json`,
-writing `CHANGELOG.md`); merging it cuts the tag, the GitHub Release and a zip of
-the unpacked extension. Chrome Web Store upload is opt-in via the
+writing `CHANGELOG.md`); merging it cuts the tag, the GitHub Release and two zips of
+the unpacked extension — one version-named, one stable-named so
+`releases/latest/download/olx-dark-theme.zip` never goes stale. Chrome Web Store upload is opt-in via the
 `PUBLISH_TO_WEB_STORE` repo variable plus `CWS_*` secrets. CI-plumbing commits are
 `ci:`/`chore:` so they do not consume a version bump.
 
