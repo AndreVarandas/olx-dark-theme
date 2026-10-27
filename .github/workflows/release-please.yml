@@ -1,7 +1,9 @@
 # Derives the next version from Conventional Commits on main and maintains the
-# release PR (bumps manifest.json via the chrome-ext release type, updates
-# CHANGELOG.md). Merging that PR is the release decision: release-please then
-# cuts the tag and the GitHub Release, which triggers publish.yml.
+# release PR (bumps manifest.json via the `simple` type plus a JSON extra-file,
+# updates CHANGELOG.md). Merging that PR is the release decision: release-please
+# then cuts the tag and the GitHub Release. Publishing is NOT chained — the
+# release is created with the workflow token, and GitHub does not chain
+# workflows off such events — so dispatch publish.yml for the tag afterwards.
 name: release-please
 
 on:
