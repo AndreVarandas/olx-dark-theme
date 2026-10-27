@@ -9,13 +9,13 @@ Both sites are built on the same OLX Group design system, so the theme works the
 on each: it overrides the design tokens rather than inverting colours, so components keep
 their layout, hierarchy and brand accent — only the palette changes.
 
-### OLX.pt
+### OLX.pt — cars listings
 
-![The OLX.pt home page themed dark: black canvas, teal accent, category tiles and search bar](screenshots/olx-home.jpg)
+![The OLX.pt cars listing themed dark: black canvas, dark listing cards with untouched photos, teal accents and TOP badges](screenshots/olx-cars.png)
 
-### Standvirtual.com
+### Standvirtual.com — home
 
-![The standvirtual.com home page themed dark: near-black surfaces, brand-blue buttons, listing photos untouched](screenshots/standvirtual-home.jpg)
+![The standvirtual.com home page themed dark: near-black surfaces, brand-blue buttons, listing photos untouched](screenshots/standvirtual-home.png)
 
 ## Install
 
@@ -41,8 +41,9 @@ The extension runs on six exact origins and nothing else:
 - `standvirtual.com`, `www.standvirtual.com`, `m.standvirtual.com`, `login.standvirtual.com`
 
 Everything else on those domains — the help centres, blogs, static asset hosts and
-sibling apps such as `carros.standvirtual.com` — is out of reach. `m.olx.pt` redirects to
-`www.olx.pt`, so it needs no entry of its own.
+sibling apps such as `carros.standvirtual.com` — is out of reach. OLX serves a separate
+mobile template on `m.olx.pt`, which it redirects desktop browsers to below roughly a
+1280-px viewport; that template is a different app and is deliberately not themed.
 
 It requests `storage` (the on/off preference) and `scripting` (registering the stylesheets
 while the theme is on). It does **not** request `tabs`, `webRequest`, `cookies` or
@@ -138,9 +139,10 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
   pages. What remains: the OLX login flow, and the Standvirtual publishing wizard behind
   the `/carros/anunciar` entry form (reaching it means creating a real listing). If a
   panel still looks light, add a patch keyed to its `data-testid`.
-- **Deliberately out of scope:** `business.olx.pt`, `help.olx.pt`,
-  `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer subdomains — they
-  sit outside the six-origin allowlist, so the theme never touches them.
+- **Deliberately out of scope:** the OLX mobile site (`m.olx.pt`), `business.olx.pt`,
+  `help.olx.pt`, `ajuda.standvirtual.com`, `carros.standvirtual.com` and the dealer
+  subdomains — they sit outside the six-origin allowlist, so the theme never touches
+  them.
 - **Both sites ship new tokens over time.** A broken theme is usually a renamed variable,
   found by diffing `getComputedStyle(document.body)` for `--*color*`.
 
