@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.1...v0.2.2) (2026-10-27)
+
+
+### Features
+
+* theme the mobile layout on m.olx.pt ([bae3b2b](https://github.com/AndreVarandas/olx-dark-theme/commit/bae3b2bceabec984964c7dbd7f72268ff4a88958))
+
 ## [0.2.1](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.0...v0.2.1) (2026-10-27)
 
 
