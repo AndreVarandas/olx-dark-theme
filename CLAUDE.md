@@ -195,19 +195,25 @@ bumping for you. The baseline is `v0.2.0`.
 
 The automation lives in `.github/workflows/`: release-please keeps a release PR open
 (bumping `manifest.json`, writing `CHANGELOG.md`); merging it cuts the tag and the
-GitHub Release. Publishing is not chained automatically — release-please creates the
-release with the workflow token, and such events do not trigger further workflows —
-so run `publish.yml` for the tag. The tag must already have a GitHub Release — the
-workflow uploads to it and does not create one. It validates, then attaches two zips
-of the unpacked extension (version-named, plus stable-named so
-`releases/latest/download/olx-dark-theme.zip` never goes stale). The release assets
-are uploaded with `--clobber`, so re-running for a tag is safe; the opt-in web-store
-job, however, re-uploads whenever it runs:
+GitHub Release, and the same run publishes it. Publishing is a job in
+`release-please.yml` gated on `release_created`, which calls `publish.yml` as a
+**reusable workflow** (`uses: ./.github/workflows/publish.yml`). That is deliberate:
+release-please creates its Release with the workflow token, and GitHub never starts
+a workflow from an event that token created, so `on: release: published` and
+`on: push: tags:` both stay silent. A reusable call is not an event, so it works.
+
+`publish.yml` still accepts `workflow_dispatch` for the paths a push cannot cover —
+re-publishing a tag, or backfilling the assets of an older release:
 
 ```bash
-TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
-gh workflow run publish.yml -f tag="$TAG"
+gh workflow run publish.yml -f tag=v0.2.3
 ```
+
+The tag must already have a GitHub Release — the workflow uploads to it and does not
+create one. It validates, then attaches two zips of the unpacked extension
+(version-named, plus stable-named so `releases/latest/download/olx-dark-theme.zip`
+never goes stale). The release assets are uploaded with `--clobber`, so re-running
+for a tag is safe; the opt-in web-store job, however, re-uploads whenever it runs.
 
 Chrome Web Store upload is opt-in via the `PUBLISH_TO_WEB_STORE` repo variable plus
 `CWS_*` secrets; the store item itself must be created once by hand (see

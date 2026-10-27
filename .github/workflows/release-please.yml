@@ -1,9 +1,14 @@
 # Derives the next version from Conventional Commits on main and maintains the
 # release PR (bumps manifest.json via the `simple` type plus a JSON extra-file,
 # updates CHANGELOG.md). Merging that PR is the release decision: release-please
-# then cuts the tag and the GitHub Release. Publishing is NOT chained — the
-# release is created with the workflow token, and GitHub does not chain
-# workflows off such events — so dispatch publish.yml for the tag afterwards.
+# then cuts the tag and the GitHub Release, and the `publish` job below attaches
+# the zips to it in the same run.
+#
+# Why the publish job is a job here and not a `release:` trigger elsewhere:
+# release-please creates the Release with the workflow token, and GitHub never
+# chains a workflow off an event that token created. Calling publish.yml as a
+# reusable workflow needs no event at all, so nothing is lost. (A tag-push
+# trigger has the same problem, for the same reason.)
 name: release-please
 
 on:
@@ -22,7 +27,24 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.release.outputs.release_created }}
+      tag: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v5
+      - id: release
+        uses: googleapis/release-please-action@v5
       # Version and bump rules: release-please-config.json +
-      # .release-please-manifest.json
+      # .release-please-manifest.json. `release_created` / `tag_name` are set
+      # because the only package is the root ("./"), which is also what makes
+      # them available as job outputs above.
+
+  # Runs only on the push that merges a release PR — the one that creates the
+  # tag and the Release. A push that merely updates the open release PR skips it.
+  publish:
+    needs: release-please
+    if: needs.release-please.outputs.released == 'true'
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag: ${{ needs.release-please.outputs.tag }}
+    # The Chrome Web Store job inside publish.yml needs the CWS_* secrets.
+    secrets: inherit

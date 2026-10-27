@@ -1,19 +1,26 @@
 # Publishes a release: validates the sources with the checks documented in
 # CLAUDE.md, then attaches two zips of the unpacked extension to the Release.
-# This does NOT run automatically after release-please — its release is created
-# with the workflow token, and GitHub does not chain workflows off such events —
-# so dispatch it for the tag explicitly (see the trigger below). The
-# `release: published` trigger only covers a release published by hand.
+#
+# The normal path is automatic — release-please.yml's `publish` job calls this
+# workflow as a reusable one in the same run, the moment a release is created.
+# A reusable call is not an event, so it dodges the rule that blocks chaining:
+# release-please creates its Release with the workflow token, and GitHub never
+# starts a workflow from an event that token created.
+#
+# The other two triggers exist for the paths that are not a release-please run:
+# a Release published by hand, and re-publishing (or backfilling) any tag.
 # The web-store job is opt-in (see the comment on it).
 name: publish
 
 on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to publish (e.g. v0.2.1)
+        required: true
+        type: string
   release:
     types: [published]
-  # release-please publishes its release with the workflow token, and GitHub
-  # does not chain workflows off GITHUB_TOKEN-created events — so the release
-  # event never reaches this workflow. Dispatch it for that tag explicitly:
-  #   gh workflow run publish.yml -f tag=v0.2.1
   workflow_dispatch:
     inputs:
       tag:
@@ -27,7 +34,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -48,7 +55,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -82,7 +89,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - uses: actions/checkout@v7
         with:
