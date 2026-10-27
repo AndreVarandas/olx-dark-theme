@@ -80,6 +80,7 @@ html[data-olxd="1"] #client-root {
 
   --color-background-status-warning: #ffce32 !important;
   --colorsBackgroundStatusWarning: #ffce32 !important;
+  --color-background-status-warning-subtle: #3a2e08 !important;
   --colorsBackgroundStatusWarningSubtle: #3a2e08 !important;
 
   --colorsBackgroundPhoto: #000000a6 !important;
