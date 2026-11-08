@@ -432,6 +432,20 @@ html[data-svd="1"] [class~="bg-background-brand-notification-neutral"] {
   color: var(--olxd-text) !important;
 }
 
+/* ---- Icons ------------------------------------------------------------
+   Design-system icons carry a near-black default ink (#020309) on their own
+   class, so they disappear on the dark canvas even when the surrounding text
+   is light. Repaint the default from the parent colour. Inline icon colours
+   (the price-rating badges) are left alone, and the button icon-colour
+   variable is restored afterwards. */
+html[data-svd="1"] svg[viewBox="0 0 24 24"]:not([style*="color"]) {
+  color: inherit !important;
+}
+
+html[data-svd="1"] .n-button-svg-wrapper svg[viewBox="0 0 24 24"] {
+  color: var(--iconColor, currentColor) !important;
+}
+
 /* ---- Tables & dividers ------------------------------------------------ */
 html[data-svd="1"] hr {
   border-color: var(--olxd-line) !important;
