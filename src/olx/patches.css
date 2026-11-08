@@ -22,6 +22,23 @@ html[data-olxd="1"] [data-testid="home-page"] > div > div {
   background-color: transparent !important;
 }
 
+/* The ad-backed homepage layout sizes and paints the whole card inline
+   (`background: #F2F4F5 !important`) so it can sit over a billboard creative.
+   A stylesheet !important cannot beat an inline !important, so cover the light
+   fill with a pseudo-element instead of trying to repaint the background. */
+html[data-olxd="1"] #searchmain-container {
+  position: relative !important;
+}
+
+html[data-olxd="1"] #searchmain-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--olxd-page);
+  pointer-events: none;
+}
+
 /* A mint band above the footer. */
 html[data-olxd="1"] [data-testid="site-information"] {
   background-color: var(--olxd-surface) !important;
