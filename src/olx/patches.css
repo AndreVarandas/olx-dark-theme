@@ -219,6 +219,17 @@ html[data-olxd="1"] select {
   background-image: none;
 }
 
+/* The category flyout paints its selected/hovered row with the
+   foreground-primary token, which is light in the dark theme, so the label
+   disappears. Scope that token to a dark fill inside both menu columns (the
+   site uses both kebab and camel forms) and keep the menu text light. */
+html[data-olxd="1"] #category-dropdown-list,
+html[data-olxd="1"] [data-cy="child-category-dropdown-list"] {
+  --color-foreground-primary: var(--olxd-surface-3) !important;
+  --colorsForegroundPrimary: var(--olxd-surface-3) !important;
+  color: var(--olxd-text) !important;
+}
+
 html[data-olxd="1"] fieldset,
 html[data-olxd="1"] legend {
   color: var(--olxd-text) !important;
