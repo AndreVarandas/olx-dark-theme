@@ -230,6 +230,13 @@ html[data-olxd="1"] [data-cy="child-category-dropdown-list"] {
   color: var(--olxd-text) !important;
 }
 
+/* The result-count badge reuses the same token for its number ink, so give it
+   the light text colour back after darkening the selected-row fill above. */
+html[data-olxd="1"] #category-dropdown-list [data-nx-name="Badge"],
+html[data-olxd="1"] [data-cy="child-category-dropdown-list"] [data-nx-name="Badge"] {
+  --numberColor: var(--olxd-text) !important;
+}
+
 html[data-olxd="1"] fieldset,
 html[data-olxd="1"] legend {
   color: var(--olxd-text) !important;
