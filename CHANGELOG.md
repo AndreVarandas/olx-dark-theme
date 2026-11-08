@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.4](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.3...v0.2.4) (2026-11-08)
+
+
+### Bug Fixes
+
+* keep the category dropdown readable ([a3d7815](https://github.com/AndreVarandas/olx-dark-theme/commit/a3d781583b5cd71a02d2a0118efc43c066b3d376))
+* keep the category result counts readable ([11c8858](https://github.com/AndreVarandas/olx-dark-theme/commit/11c8858ca964382a433095965b241ea013a9fe2b))
+* make Standvirtual icons visible in dark mode ([24e0538](https://github.com/AndreVarandas/olx-dark-theme/commit/24e0538c92ca0f8093734d9a399a0864f8bb8a75))
+* theme the ad-backed homepage card ([d80d829](https://github.com/AndreVarandas/olx-dark-theme/commit/d80d8298e79a55755efb1cadc486505f9a779dc6))
+
 ## [0.2.3](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.2...v0.2.3) (2026-10-27)
 
 
