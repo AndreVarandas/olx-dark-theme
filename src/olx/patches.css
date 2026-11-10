@@ -302,8 +302,26 @@ html[data-olxd="1"] [data-testid="ads-limit-list"] button[aria-current="true"] {
   color: var(--olxd-text) !important;
 }
 
-/* Chat thread: your own messages sit in a periwinkle bubble whose text is our
-   light body colour. Received messages are already black. */
+/* Chat thread: the outer wrapper paints a light canvas. Strip it and paint
+   the message list directly — its <ul> carries data-testid="messages-list-container". */
+html[data-olxd="1"] [data-testid="select-conversation"],
+html[data-olxd="1"] [data-testid="select-conversation"] > div {
+  background-color: transparent !important;
+}
+
+html[data-olxd="1"] [data-testid="messages-list-container"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* Received messages — white bubble with black text in the light theme. Flip to
+   a dark fill and light ink so they are readable on the dark canvas. */
+html[data-olxd="1"] [data-testid="received-message"],
+html[data-olxd="1"] [data-testid="received-message"] > div {
+  background-color: var(--olxd-surface-2) !important;
+  color: var(--olxd-text) !important;
+}
+
+/* Sent messages: periwinkle bubble whose text is our light body colour. */
 html[data-olxd="1"] [data-testid="sent-message"] > div {
   background-color: #12325e !important;
   color: #d4ebff !important;
