@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.4...v0.2.5) (2026-11-10)
+
+
+### Bug Fixes
+
+* theme chat thread background and received message bubbles ([ae215ce](https://github.com/AndreVarandas/olx-dark-theme/commit/ae215cea26438b9fbd7f3319a25e87683fb407c8))
+
 ## [0.2.4](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.3...v0.2.4) (2026-11-08)
 
 
