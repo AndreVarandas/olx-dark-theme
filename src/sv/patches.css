@@ -336,6 +336,20 @@ html[data-svd="1"] [data-testid="photo-gallery-item"] {
   background-color: var(--olxd-surface-2) !important;
 }
 
+/* Recommended-ads carousel at the foot of the page ("Outros anúncios que
+   lhe podem interessar"). The same result-card component as the search
+   results, but rendered under its own testid hook: a hardcoded white
+   emotion fill with near-black title and meta copy. The price rides the
+   status-error foreground token, which the palette already lightens. */
+html[data-svd="1"] [data-testid="similar-ads-section"] article {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-svd="1"] [data-testid="similar-ads-section"] article h2,
+html[data-svd="1"] [data-testid="similar-ads-section"] article p {
+  color: var(--olxd-text) !important;
+}
+
 html[data-svd="1"] [data-testid="main-services"] li {
   background-color: var(--olxd-surface) !important;
 }
