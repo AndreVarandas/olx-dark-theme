@@ -54,11 +54,26 @@ iframes are intentionally exempt — they are dimmed, not recoloured.
 | Seller page (dealer business site) | out of scope | dealer subdomains (`<dealer>.standvirtual.com`) are a separate app and are not in the manifest's host permissions |
 | Chat popup (message composer) | blocked | needs a logged-in viewer; disabled send button stays light |
 
-## Mobile layout
+## OLX mobile layout (`m.olx.pt`, narrow viewports)
 
-Not audited. Extensions are desktop-only; the narrow (`<~1024px`) layout is the
-only way it surfaces, and the current pass targeted desktop widths. Revisit only
-if a narrow-window review is requested.
+Audited at a 390×844 viewport with touch emulation. `mobile.css` is registered
+only for `m.olx.pt`.
+
+| Surface | Status | Notes |
+| --- | --- | --- |
+| Home | clear | ad creative inside its own frame |
+| Search results + filters | fixed | filters route (`/searchform/ads/…`) painted white |
+| Ad detail | fixed | `#406367` meta inks (posted-at, member-since, category footer) |
+| Ad detail gallery | clear | dark viewer with a readable `N de M` counter |
+| Favourites (`/observed`) | fixed | white app shell, light `<main>`, white title bar |
+| Account menu (`/account/menu/`) | fixed | shell, `<header>`, near-black row inks, cream/mint CTAs |
+| Chat list (`/myaccount/answers/`) | fixed | shell and `<main>` painted light; empty state's plus glyph is dark teal (cosmetic) |
+| Publish entry (`/adding`) | fixed | white shell and title bar |
+| Chat thread | blocked | no conversations on this account |
+| Filters / sort sheets | fixed | same route as above |
+
+Mobile fixes are one commit (`fix: theme the mobile account, filters and
+publish shells`) on top of the palette rules that already apply at any width.
 
 ## Findings
 
@@ -96,6 +111,24 @@ if a narrow-window review is requested.
   light-on-dark.
 - Similar-ads spec strip (`ad-card-characteristics` items) kept the `#020309`
   icon ink; the earlier `h2`/`p` rule did not reach it.
+
+### OLX — mobile
+
+- Account-area routes are a second app shell (`#client-root`, not
+  `#hydrate-root`) that paints a white page layer; their `<main>` carries the
+  light content fill (`#FFF`, `#F2F4F5`, `#FAFBFB`) and their title bar is a
+  page-level `<header>` painted white. All three are generated-class shells, so
+  they are matched structurally (`#client-root > div`, `main`, `main > header`).
+- The filters route (`/searchform/ads/…`) is a full page rather than a sheet and
+  had the same white `<main>` plus a near-black "Ordenar por" label.
+- The account menu hardcodes `#02282C` on every row and section heading, fills
+  its two shortcut cards with cream (`#FFF6D9`) and mint (`#C8F8F6`), and paints
+  the item counter chip `#F2F4F5`. Repainted through the `user-menu-link`
+  testid, with the teal "Editar" bubble left on its original dark ink.
+- Ad detail reuses the desktop `#406367` inks (`member-since`,
+  `l-categories-footer-content`), now covered by the shared palette rules.
+- Cosmetic, left alone: the chat empty state's plus glyph is dark teal on dark,
+  and the publish illustration is a white-background image asset.
 
 ### Blocked surfaces (need a reproducible state)
 
