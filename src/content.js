@@ -19,7 +19,6 @@
   const SV_HOSTS = [
     'standvirtual.com',
     'www.standvirtual.com',
-    'm.standvirtual.com',
     'login.standvirtual.com',
   ];
 

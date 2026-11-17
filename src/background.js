@@ -28,11 +28,10 @@ const SITES = [
   },
   {
     id: 'sv-dark',
-    hosts: ['standvirtual.com', 'www.standvirtual.com', 'm.standvirtual.com', 'login.standvirtual.com'],
+    hosts: ['standvirtual.com', 'www.standvirtual.com', 'login.standvirtual.com'],
     matches: [
       '*://standvirtual.com/*',
       '*://www.standvirtual.com/*',
-      '*://m.standvirtual.com/*',
       '*://login.standvirtual.com/*',
     ],
     css: ['src/sv/tokens.css', 'src/sv/theme.css', 'src/sv/patches.css'],

@@ -62,9 +62,9 @@ mobile, SV desktop and SV narrow, including the three follow-ups it uncovered
 
 ## Standvirtual — narrow layout (`www`, ≤~1024px)
 
-`m.standvirtual.com` does not answer (connection timeout), so the narrow layout
-is the responsive `www` app, themed by the desktop token layer. Spot-checked at
-390×844.
+Standvirtual has no separate mobile host (its `m.` host does not answer and is
+not in the manifest), so the narrow layout is the responsive `www` app, themed
+by the desktop token layer. Spot-checked at 390×844.
 
 | Surface | Status | Notes |
 | --- | --- | --- |
