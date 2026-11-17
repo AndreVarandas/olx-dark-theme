@@ -127,6 +127,16 @@ Available tokens on both sites: `--olxd-page`, `--olxd-surface`, `--olxd-surface
 `--olxd-line-strong`, `--olxd-accent`, `--olxd-on-accent`. Standvirtual also exposes
 `--olxd-action` (its brand blue fill).
 
+Before opening a pull request, run the structural guard (also enforced by CI):
+
+```bash
+node tools/check.mjs
+```
+
+It checks JS syntax, JSON documents, CSS balance, generated-class selectors,
+registered source files, the manifest/background host lists and the version
+sync. No dependencies, no install step.
+
 ## Palettes
 
 - **OLX:** page `#000000`, cards `#0D0D0D`, overlays `#161616`, hairlines `#FFFFFF14`,

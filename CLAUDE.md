@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A Manifest V3 Chrome extension that darkens `*.olx.pt` and `*.standvirtual.com`. It is
-CSS-only theming: no bundler, no dependencies, no package.json, no tests, no lint step. The
+CSS-only theming: no bundler, no dependencies, no package.json, no test framework. The
 extension is loaded unpacked from this directory, so a change is live after
 `chrome://extensions` → reload (and a page refresh).
 
@@ -15,9 +15,10 @@ one toolbar button covers both. The palettes are site-specific.
 ## Commands
 
 ```bash
-# Verify the extension is structurally valid before reloading it
-node --check src/background.js && node --check src/content.js
-python3 -c "import json; json.load(open('manifest.json'))"
+# Structural guard: JS syntax, JSON, CSS balance, generated-class selectors,
+# registered source files, manifest/background host lists and version sync.
+# Zero dependencies; CI runs the same script on every push and PR.
+node tools/check.mjs
 
 # Regenerate icons (dependency-free, writes icons/icon-{16,32,48,128}.png)
 python3 tools/make-icons.py
