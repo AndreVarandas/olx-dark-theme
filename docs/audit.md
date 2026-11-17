@@ -51,7 +51,7 @@ iframes are intentionally exempt — they are dimmed, not recoloured.
 | Ad detail | fixed | "Ver N fotos", condensed sticky header, full-screen gallery |
 | Ad detail gallery (full screen) | fixed | white canvas + invisible counter |
 | Similar-ads carousel | fixed | `a3af014`; spec strip inks fixed in this pass |
-| Seller page (dealer business site) | out of scope | `*.standvirtual.com` dealer sites are a separate app with their own palette and no `data-svd` scope |
+| Seller page (dealer business site) | out of scope | dealer subdomains (`<dealer>.standvirtual.com`) are a separate app and are not in the manifest's host permissions |
 | Chat popup (message composer) | blocked | needs a logged-in viewer; disabled send button stays light |
 
 ## Mobile layout
