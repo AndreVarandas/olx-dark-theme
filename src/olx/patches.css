@@ -176,6 +176,16 @@ html[data-olxd="1"] [data-testid="l-card"] div[type="list"] {
   background-color: var(--olxd-surface-2) !important;
 }
 
+/* The meta lines under the price — location, bump/post date, mileage — are
+   the card's P5 paragraphs (titles are P3) and paint the light theme's
+   #406367 primitive as ink: near-invisible on black. The primitive doubles
+   as a border colour in ~130 places, so repaint the elements, not the
+   variable. */
+html[data-olxd="1"] [data-testid="ad-card"] p[data-nx-name="P5"],
+html[data-olxd="1"] [data-testid="ad-card"] p[data-nx-name="P5"] span {
+  color: var(--olxd-text-dim) !important;
+}
+
 /* ---- Footer ----------------------------------------------------------- */
 html[data-olxd="1"] #footerContent {
   background-color: var(--olxd-page) !important;
@@ -235,6 +245,26 @@ html[data-olxd="1"] [data-cy="child-category-dropdown-list"] {
 html[data-olxd="1"] #category-dropdown-list [data-nx-name="Badge"],
 html[data-olxd="1"] [data-cy="child-category-dropdown-list"] [data-nx-name="Badge"] {
   --numberColor: var(--olxd-text) !important;
+}
+
+/* ---- Filter rows & pagination -----------------------------------------
+   Both components paint their ink in the light theme's near-black teal
+   (#02282C), invisible on black.
+   The category row's label is the first span inside the checkmark link; the
+   count badge after it keeps its yellow pill and dark ink, so it is left
+   alone. */
+html[data-olxd="1"] [data-testid="dropdown-checkmark"] > span > span:first-child,
+html[data-olxd="1"] [data-testid="dropdown-checkmark"] > span > span:first-child span {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-olxd="1"] [data-testid="pagination-list-item"] a {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* The active page number stays bright. */
+html[data-olxd="1"] [data-testid="pagination-list-item"][class*="__active"] a {
+  color: var(--olxd-text) !important;
 }
 
 html[data-olxd="1"] fieldset,
@@ -585,6 +615,57 @@ html[data-olxd="1"] .userbox-dd a span {
 html[data-olxd="1"] .userbox-dd h5,
 html[data-olxd="1"] .userbox-dd i {
   color: var(--olxd-text-muted) !important;
+}
+
+/* ---- Seller profile page (/ads/user/…) --------------------------------
+   A legacy page: a single `<main data-nx-name="Page">` under #mainContent
+   paints #F2F4F5, so the page renders as a light strip between the dark
+   header and content. */
+html[data-olxd="1"] #mainContent main[data-nx-name="Page"] {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Its meta lines ("No OLX desde…", "Esteve online dia…") paint the light
+   theme's #406367 primitive as text ink — near-invisible on black. The
+   primitive itself doubles as a border colour elsewhere, so repaint only
+   these two elements, not the variable. */
+html[data-olxd="1"] main[data-nx-name="Page"] [data-testid="member-since"],
+html[data-olxd="1"] main[data-nx-name="Page"] [data-testid="member-since"] span,
+html[data-olxd="1"] main[data-nx-name="Page"] [data-testid="lastSeenBox"],
+html[data-olxd="1"] main[data-nx-name="Page"] [data-testid="lastSeenBox"] span {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* The listing sidebar's filter-group headings ("Categorias") hardcode the
+   light theme's dark-teal ink. Scoped to the listing wrapper so the seller
+   name and the tab strip keep their colours. */
+html[data-olxd="1"] [data-testid="seller-listing"] h4 {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* ---- Notification hub -------------------------------------------------
+   The bell dropdown opens as a hardcoded white sheet. Its rows paint white
+   (read) or a 50% mint wash (unread), with a full-mint hover, and the sheet's
+   title strip inherits the page's light text. The row fills hardcode their
+   colours, so they are repainted here; the row carries data-state, and the
+   ⋯ button and row icon already resolve to the accent. */
+html[data-olxd="1"] [data-testid="notification-hub-dropdown"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+/* Read rows sit on the base surface, unread rows on the raised one — the
+   dark-theme stand-in for the light theme's mint wash — and hover lifts one
+   step further. */
+html[data-olxd="1"] [data-testid="notification-hub-list-item"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] [data-testid="notification-hub-list-item"][data-state="unread"] {
+  background-color: var(--olxd-surface-2) !important;
+}
+
+html[data-olxd="1"] [data-testid="notification-hub-list-item"]:hover {
+  background-color: var(--olxd-surface-3) !important;
 }
 
 /* ---- Error page -------------------------------------------------------
