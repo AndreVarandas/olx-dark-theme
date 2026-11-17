@@ -12,6 +12,10 @@ viewport or reachable by scrolling; trigger the surface's interactions (modals,
 expanded dropdowns, lazy bands) before scanning. Cross-origin ad creatives inside
 iframes are intentionally exempt — they are dimmed, not recoloured.
 
+**Last live verification:** 17 Nov 2026, with the extension loaded (not injected
+CSS). All `fixed` rows below were re-checked in that pass on OLX desktop, OLX
+mobile, SV desktop and SV narrow.
+
 ## Status legend
 
 - `clear` — scanned, nothing outstanding
@@ -53,6 +57,18 @@ iframes are intentionally exempt — they are dimmed, not recoloured.
 | Similar-ads carousel | fixed | `a3af014`; spec strip inks fixed in this pass |
 | Seller page (dealer business site) | out of scope | dealer subdomains (`<dealer>.standvirtual.com`) are a separate app and are not in the manifest's host permissions |
 | Chat popup (message composer) | blocked | needs a logged-in viewer; disabled send button stays light |
+
+## Standvirtual — narrow layout (`www`, ≤~1024px)
+
+`m.standvirtual.com` does not answer (connection timeout), so the narrow layout
+is the responsive `www` app, themed by the desktop token layer. Spot-checked at
+390×844.
+
+| Surface | Status | Notes |
+| --- | --- | --- |
+| Home | clear | ad creative is bright (exempt) |
+| Search results | fixed | sticky "Filtros" chip was white-on-white |
+| Ad detail | clear | gallery, badges and sticky bar already themed |
 
 ## OLX mobile layout (`m.olx.pt`, narrow viewports)
 
@@ -99,6 +115,13 @@ publish shells`) on top of the palette rules that already apply at any width.
   icon hardcoded `#187E0D` (≈2.9:1). Repainted to the light-green ink used by the
   other green pills.
 
+### SV — narrow layout
+
+- The sticky strip above the results renders "Filtros" as a hardcoded white
+  pill whose label takes the dark-theme ink — a blank white rectangle next to
+  the dark "Pesquisa IA" and sort chips. Repainted through `[data-testid=
+  "filters"] article > div`; desktop exposes no such structure.
+
 ### SV — ad detail
 
 - "Ver N fotos" chip: dark ink on its own dark chip.
@@ -118,7 +141,9 @@ publish shells`) on top of the palette rules that already apply at any width.
   `#hydrate-root`) that paints a white page layer; their `<main>` carries the
   light content fill (`#FFF`, `#F2F4F5`, `#FAFBFB`) and their title bar is a
   page-level `<header>` painted white. All three are generated-class shells, so
-  they are matched structurally (`#client-root > div`, `main`, `main > header`).
+  they are matched structurally (`#client-root > div`, `main`, `main header` —
+  the header sits directly under `<main>` on favourites but inside the page's
+  `<form>` on filters and publish).
 - The filters route (`/searchform/ads/…`) is a full page rather than a sheet and
   had the same white `<main>` plus a near-black "Ordenar por" label.
 - The account menu hardcodes `#02282C` on every row and section heading, fills
