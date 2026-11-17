@@ -161,6 +161,17 @@ html[data-svd="1"] [class*="bg-[#E8FBE4]"] {
   color: #9fe6b5 !important;
 }
 
+/* The valuation panel's "~10 000 carros avaliados" line and its tick icon
+   hardcode #187E0D on that same pill — 2.9:1 against the dark green. */
+html[data-svd="1"] [class*="bg-[#E8FBE4]"] p,
+html[data-svd="1"] [class*="bg-[#E8FBE4]"] span {
+  color: #9fe6b5 !important;
+}
+
+html[data-svd="1"] [class*="bg-[#E8FBE4]"] svg path {
+  fill: #9fe6b5 !important;
+}
+
 /* The pagination strip paints a white band behind its page buttons. */
 html[data-svd="1"] main div:has(> div > ul > li > button[aria-current]) {
   background-color: transparent !important;
@@ -336,6 +347,35 @@ html[data-svd="1"] [data-testid="photo-gallery-item"] {
   background-color: var(--olxd-surface-2) !important;
 }
 
+/* The condensed ad header that docks to the top once you scroll past the
+   gallery fills with a 60%-white utility plus a backdrop blur — a bright band
+   over the dark page. */
+html[data-svd="1"] [data-testid="header-sticky"] {
+  background-color: #111213e6 !important;
+}
+
+/* "Ver N fotos" overlays the last thumbnail in a dark chip, but its label
+   keeps the light theme's near-black ink. */
+html[data-svd="1"] [data-testid="see-all-photos-cta"],
+html[data-svd="1"] [data-testid="see-all-photos-cta"] span {
+  color: var(--olxd-text) !important;
+}
+
+/* Full-screen photo viewer. Its canvas and the "N/M" counter fill with
+   `bg-turbo-content-default`, which is the *ink* token (white in dark mode)
+   used as a background — so the whole viewer renders as a white sheet, and the
+   counter's white label vanishes on it. The token itself must stay white
+   because body text uses it, so the repaint is scoped to the viewer. */
+html[data-svd="1"] [data-testid="experimental-fullscreen-gallery"],
+html[data-svd="1"] [data-testid="experimental-fullscreen-gallery"] [class~="bg-turbo-content-default"] {
+  background-color: var(--olxd-page) !important;
+}
+
+html[data-svd="1"] [data-testid="experimental-fullscreen-gallery"] [data-testid="photo-counter"] {
+  background-color: #111213cc !important;
+  color: var(--olxd-text) !important;
+}
+
 /* Recommended-ads carousel at the foot of the page ("Outros anúncios que
    lhe podem interessar"). The same result-card component as the search
    results, but rendered under its own testid hook: a hardcoded white
@@ -347,6 +387,14 @@ html[data-svd="1"] [data-testid="similar-ads-section"] article {
 
 html[data-svd="1"] [data-testid="similar-ads-section"] article h2,
 html[data-svd="1"] [data-testid="similar-ads-section"] article p {
+  color: var(--olxd-text) !important;
+}
+
+/* The card's spec strip ("2022", "52 364 km", "Diesel") is a characteristics
+   list whose items take the icon default #020309 — invisible on the dark
+   card, and not covered by the h2/p rule above. */
+html[data-svd="1"] [data-testid="similar-ads-section"] article [data-testid="ad-card-characteristics"] li,
+html[data-svd="1"] [data-testid="similar-ads-section"] article [data-testid="ad-card-characteristics"] li span {
   color: var(--olxd-text) !important;
 }
 
