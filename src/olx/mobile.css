@@ -96,6 +96,13 @@ html[data-olxd="1"] main:has([data-testid="filter-selector"]) label {
   color: var(--olxd-text) !important;
 }
 
+/* Settings list rows ("Login e segurança", "Editar perfil", …) hardcode the
+   same #02282C ink. The list carries a stable testid; its labels are bare
+   divs under each row link. */
+html[data-olxd="1"] [data-testid="settings-list"] a div {
+  color: var(--olxd-text) !important;
+}
+
 html[data-olxd="1"] main:has([data-testid="filter-selector"]) label {
   color: var(--olxd-text) !important;
 }
