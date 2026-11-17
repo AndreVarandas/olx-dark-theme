@@ -411,6 +411,25 @@ html[data-svd="1"] [data-testid="main-services"] li {
   background-color: var(--olxd-surface) !important;
 }
 
+/* ---- Chat popup ("Enviar mensagem") -----------------------------------
+   The composer sheet itself is dark from the token layer. Three pieces are
+   not: the close pill fills 80% white with a near-black icon, the "Hoje"
+   date divider hardcodes #020309, and the disabled send button fills
+   #DCDDE0 while its icon is white (invisible). */
+html[data-svd="1"] [data-testid="seller-send-message-popup"] [data-testid="close"] {
+  background-color: var(--olxd-surface-3) !important;
+  color: var(--olxd-text) !important;
+}
+
+html[data-svd="1"] [data-testid="seller-send-message-popup"] [data-testid="message-time-block"] * {
+  color: var(--olxd-text-dim) !important;
+}
+
+html[data-svd="1"] [data-testid="seller-send-message-popup"] button[aria-label="Submit message"] {
+  background-color: var(--olxd-surface-3) !important;
+  color: var(--olxd-text) !important;
+}
+
 /* The price-drop badge pairs a light green fill with our light green text. */
 html[data-svd="1"] [data-testid="price-drop-savings-badge"] {
   background-color: #0d2a1f !important;
