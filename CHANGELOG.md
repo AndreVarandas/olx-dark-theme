@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.5](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.4...v0.2.5) (2026-11-17)
+
+
+### Bug Fixes
+
+* theme chat thread background and received message bubbles ([ae215ce](https://github.com/AndreVarandas/olx-dark-theme/commit/ae215cea26438b9fbd7f3319a25e87683fb407c8))
+* theme notification hub, seller profile and listing meta text ([b5df875](https://github.com/AndreVarandas/olx-dark-theme/commit/b5df875fee314fea013da2a75eaf7ef0d81eddeb))
+* theme the Standvirtual similar-ads carousel ([a3af014](https://github.com/AndreVarandas/olx-dark-theme/commit/a3af0148d7d1c8c109704e0733c89a9c47820f02))
+
 ## [0.2.4](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.3...v0.2.4) (2026-11-08)
 
 
