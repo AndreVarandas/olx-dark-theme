@@ -137,7 +137,9 @@ html[data-olxd="1"] section:has([data-testid="adlist-slider"]) > div > a {
 html[data-olxd="1"] [data-testid="breadcrumbs"] a,
 html[data-olxd="1"] [data-testid="ad-posted-at"],
 html[data-olxd="1"] [data-testid="ad-posted-at"] span,
-html[data-olxd="1"] [data-testid="ad-footer-bar-section"] span {
+html[data-olxd="1"] [data-testid="ad-footer-bar-section"] span,
+html[data-olxd="1"] [data-testid="member-since"] span,
+html[data-olxd="1"] [data-testid="l-categories-footer-content"] span {
   color: var(--olxd-text-dim) !important;
 }
 
