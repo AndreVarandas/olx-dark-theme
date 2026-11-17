@@ -59,8 +59,9 @@ html[data-olxd="1"] main {
 }
 
 /* Account-area routes put their title bar in a page-level <header> painted
-   white, right under the dark <main>. */
-html[data-olxd="1"] main > header {
+   white. Some are direct children of <main> (favourites), others sit inside the
+   page's <form> (filters, publish), so match any header in the page body. */
+html[data-olxd="1"] main header {
   background-color: var(--olxd-page) !important;
 }
 
