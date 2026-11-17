@@ -57,7 +57,8 @@ mobile, SV desktop and SV narrow, including the three follow-ups it uncovered
 | Ad detail gallery (full screen) | fixed | white canvas + invisible counter |
 | Similar-ads carousel | fixed | `a3af014`; spec strip inks fixed in this pass |
 | Seller page (dealer business site) | out of scope | dealer subdomains (`<dealer>.standvirtual.com`) are a separate app and are not in the manifest's host permissions |
-| Chat popup (message composer) | blocked | needs a logged-in viewer; disabled send button stays light |
+| Chat popup (message composer) | fixed | close pill, "Hoje" divider and disabled send button were light |
+| Chat thread (bubbles) | blocked | no existing conversation to open |
 
 ## Standvirtual — narrow layout (`www`, ≤~1024px)
 
@@ -117,6 +118,14 @@ publish shells`) on top of the palette rules that already apply at any width.
 - Valuation aside: the mint pill was already darkened, but its label and tick
   icon hardcoded `#187E0D` (≈2.9:1). Repainted to the light-green ink used by the
   other green pills.
+
+### SV — chat popup
+
+- `seller-send-message-popup` itself is dark from the token layer, but its close
+  pill fills `rgba(255,255,255,.8)` with a near-black icon, the "Hoje" date
+  divider hardcodes `#020309`, and the disabled send button fills `#DCDDE0`
+  while its icon stays white. All three are repainted through the popup's testid;
+  the message bubble styles remain unverified until there is a real conversation.
 
 ### SV — narrow layout
 
