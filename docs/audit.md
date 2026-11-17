@@ -83,6 +83,8 @@ only for `m.olx.pt`.
 | Ad detail gallery | clear | dark viewer with a readable `N de M` counter |
 | Favourites (`/observed`) | fixed | white app shell, light `<main>`, white title bar |
 | Account menu (`/account/menu/`) | fixed | shell, `<header>`, near-black row inks, cream/mint CTAs |
+| Account: ad lists, wallet, payments, invoices, ratings | clear | re-scanned after the shell fix |
+| Account: settings (`/account/settings/`) | fixed | list rows hardcoded `#02282C` |
 | Chat list (`/myaccount/answers/`) | fixed | shell and `<main>` painted light; empty state's plus glyph is dark teal (cosmetic) |
 | Publish entry (`/adding`) | fixed | white shell and title bar |
 | Chat thread | blocked | no conversations on this account |
@@ -150,6 +152,8 @@ publish shells`) on top of the palette rules that already apply at any width.
   its two shortcut cards with cream (`#FFF6D9`) and mint (`#C8F8F6`), and paints
   the item counter chip `#F2F4F5`. Repainted through the `user-menu-link`
   testid, with the teal "Editar" bubble left on its original dark ink.
+- The settings list rows ("Login e segurança", "Editar perfil", …) hardcode
+  `#02282C`; covered through `[data-testid="settings-list"]`.
 - Ad detail reuses the desktop `#406367` inks (`member-since`,
   `l-categories-footer-content`), now covered by the shared palette rules.
 - Cosmetic, left alone: the chat empty state's plus glyph is dark teal on dark,
