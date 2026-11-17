@@ -7,8 +7,11 @@
    hardcode colours in the mobile chrome.
    ========================================================================== */
 
-/* The mobile shell paints a white page layer directly under #hydrate-root. */
-html[data-olxd="1"] #hydrate-root > div {
+/* The mobile shell paints a white page layer directly under #hydrate-root.
+   The account-area routes mount under #client-root instead, with the same
+   white shell as their first child. */
+html[data-olxd="1"] #hydrate-root > div,
+html[data-olxd="1"] #client-root > div {
   background-color: var(--olxd-page) !important;
 }
 
@@ -44,6 +47,56 @@ html[data-olxd="1"] [data-testid="bottom-bar-container"] > div > div {
    place of a class. */
 html[data-olxd="1"] main[data-testid="ad-component"] > section:first-of-type > div[visibility] {
   background-color: var(--olxd-page) !important;
+}
+
+/* Account-area routes (favourites, account menu, the conversations list) are
+   emotion shells that paint their own <main> — white on the menu, #F2F4F5 on
+   favourites and #FAFBFB on conversations. The token layer never reaches them
+   because their wrappers use generated classes only, so the page canvas is
+   repainted at <main>, which is unique per document. */
+html[data-olxd="1"] main {
+  background-color: var(--olxd-page) !important;
+}
+
+/* Account-area routes put their title bar in a page-level <header> painted
+   white, right under the dark <main>. */
+html[data-olxd="1"] main > header {
+  background-color: var(--olxd-page) !important;
+}
+
+/* The account menu (/account/menu/) hardcodes the light theme's near-black
+   (#02282C) on every row and section heading, and fills the two shortcut
+   cards with cream and mint. The row links carry a testid; the section
+   headings are bare spans, so the whole page is scoped by the presence of
+   those links. */
+html[data-olxd="1"] main:has([data-testid="user-menu-link"]) span,
+html[data-olxd="1"] main:has([data-testid="user-menu-link"]) [data-testid="user-menu-link"] div {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] [data-testid="post-ad-btn-link"],
+html[data-olxd="1"] [data-testid="buy-package-btn-link"] {
+  background-color: var(--olxd-surface) !important;
+}
+
+html[data-olxd="1"] [data-testid="user-menu-item-counter"] {
+  background-color: var(--olxd-surface-3) !important;
+}
+
+/* "Editar" sits on the brand-teal avatar bubble; white would wash out, and the
+   existing near-black is the correct pairing there. */
+html[data-olxd="1"] [data-testid="edit-btn-text"] {
+  color: #02282c !important;
+}
+
+/* The filters route (/searchform/ads/…) is a <main> page rather than a sheet;
+   its "Ordenar por" heading still hardcodes the light theme's near-black. */
+html[data-olxd="1"] main:has([data-testid="filter-selector"]) label {
+  color: var(--olxd-text) !important;
+}
+
+html[data-olxd="1"] main:has([data-testid="filter-selector"]) label {
+  color: var(--olxd-text) !important;
 }
 
 /* Ad detail — the seller's other ads and the related-ads band hardcode a light
