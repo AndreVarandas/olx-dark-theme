@@ -1,0 +1,29 @@
+# Structural guard on every change.
+#
+# This is not a test suite — the theme has no DOM to assert against and no
+# logic worth mocking. It catches the failures a CSS-only extension actually
+# has: a stylesheet that no longer parses (there is no build step), a generated
+# class selector slipping in, an unregistered source file, or the manifest's
+# host list drifting away from background.js's SITES array.
+#
+# The release workflow runs the same script before attaching the zips.
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Validate the sources
+        run: node tools/check.mjs
