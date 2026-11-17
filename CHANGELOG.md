@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.6](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.5...v0.2.6) (2026-11-17)
+
+
+### Bug Fixes
+
+* theme OLX ad meta, seller badges and footer SEO links ([531d6dd](https://github.com/AndreVarandas/olx-dark-theme/commit/531d6dd69aed01ab0da7f23c89850d31c0d14428))
+* theme OLX mobile ad-detail meta inks ([795a6d2](https://github.com/AndreVarandas/olx-dark-theme/commit/795a6d2c571c11794a6dfe2694c07847b64b262b))
+* theme OLX mobile shells, filters and account menu ([27118b2](https://github.com/AndreVarandas/olx-dark-theme/commit/27118b27a71ada7a71532509739e97d3f375eb0a))
+* theme Standvirtual full-screen gallery, sticky header and valuation ink ([477a0a6](https://github.com/AndreVarandas/olx-dark-theme/commit/477a0a6055b94c5a983edad0d1bb860641dcfe28))
+* theme the mobile filters title bar ([3199782](https://github.com/AndreVarandas/olx-dark-theme/commit/3199782c5cd291deb9ee30464ce241ac87a348ee))
+* theme the OLX mobile settings list ([ca171d5](https://github.com/AndreVarandas/olx-dark-theme/commit/ca171d57bddecf57746cfd9c8236ae51721f71b0))
+* theme the Standvirtual chat composer ([19c87b2](https://github.com/AndreVarandas/olx-dark-theme/commit/19c87b2eb14995eb8a11a4265503fada9d1a5709))
+* theme the Standvirtual narrow filters chip ([8d9f266](https://github.com/AndreVarandas/olx-dark-theme/commit/8d9f266dae1b1907424c59b82b17cf87359f7ba7))
+
 ## [0.2.5](https://github.com/AndreVarandas/olx-dark-theme/compare/v0.2.4...v0.2.5) (2026-11-17)
 
 
