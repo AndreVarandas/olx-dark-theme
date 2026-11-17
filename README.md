@@ -44,7 +44,7 @@ shows `ON` / `OFF`.
 The extension runs on seven exact origins and nothing else:
 
 - `olx.pt`, `www.olx.pt`, `m.olx.pt`
-- `standvirtual.com`, `www.standvirtual.com`, `m.standvirtual.com`, `login.standvirtual.com`
+- `standvirtual.com`, `www.standvirtual.com`, `login.standvirtual.com`
 
 Everything else on those domains — the help centres, blogs, static asset hosts and
 sibling apps such as `carros.standvirtual.com` — is out of reach. `m.olx.pt` matters
@@ -109,6 +109,9 @@ that hardcode their colours; `src/sv/patches.css` covers those with structural s
 | `src/sv/patches.css` | Standvirtual components that hardcode colours                   |
 | `src/content.js`     | Sets the site's flag before first paint                         |
 | `src/background.js`  | Toolbar button, badge, dynamic registration of both themes      |
+| `docs/audit.md`      | Surface-by-surface coverage and the last live verification      |
+| `docs/release.md`    | Release checklist: release-please → publish → web store         |
+| `tools/check.mjs`    | Zero-dependency structural guard, run locally and in CI         |
 
 ## Adding a patch
 
@@ -136,6 +139,9 @@ node tools/check.mjs
 It checks JS syntax, JSON documents, CSS balance, generated-class selectors,
 registered source files, the manifest/background host lists and the version
 sync. No dependencies, no install step.
+
+What has been verified page by page lives in [`docs/audit.md`](docs/audit.md);
+the release procedure is in [`docs/release.md`](docs/release.md).
 
 ## Palettes
 
