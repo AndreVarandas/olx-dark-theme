@@ -14,7 +14,8 @@ iframes are intentionally exempt — they are dimmed, not recoloured.
 
 **Last live verification:** 17 Nov 2026, with the extension loaded (not injected
 CSS). All `fixed` rows below were re-checked in that pass on OLX desktop, OLX
-mobile, SV desktop and SV narrow.
+mobile, SV desktop and SV narrow, including the three follow-ups it uncovered
+(mobile filters title bar, mobile settings rows, SV narrow "Filtros" chip).
 
 ## Status legend
 
