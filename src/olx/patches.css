@@ -130,6 +130,22 @@ html[data-olxd="1"] section:has([data-testid="adlist-slider"]) > div > a {
   color: var(--olxd-accent) !important;
 }
 
+/* Meta inks on the ad page hardcode the light theme's #406367 (breadcrumbs,
+   the posted/bump date above the action box and in the gallery modal, and the
+   page-view counter bar). The primitive doubles as a border colour, so the
+   elements are repainted, not the variable. */
+html[data-olxd="1"] [data-testid="breadcrumbs"] a,
+html[data-olxd="1"] [data-testid="ad-posted-at"],
+html[data-olxd="1"] [data-testid="ad-posted-at"] span,
+html[data-olxd="1"] [data-testid="ad-footer-bar-section"] span {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* The gallery lightbox draws the ad title in the light theme's near-black. */
+html[data-olxd="1"] [role="dialog"] h4 {
+  color: var(--olxd-text) !important;
+}
+
 /* ---- Primary CTAs -----------------------------------------------------
    Hardcoded dark teal on white; on a black page they invert to the accent. */
 html[data-olxd="1"] [data-testid="search-submit"] {
@@ -186,6 +202,13 @@ html[data-olxd="1"] [data-testid="ad-card"] p[data-nx-name="P5"] span {
   color: var(--olxd-text-dim) !important;
 }
 
+/* Shop sellers carry a light-lavender "Loja" badge over the card photo. The
+   pill and its ink are both hardcoded; flip to a dark pill with light ink. */
+html[data-olxd="1"] [data-testid="listing-seller-badge-more-info-trigger"] [data-nx-name="NexusBadge"] {
+  background-color: var(--olxd-surface-3) !important;
+  color: var(--olxd-text) !important;
+}
+
 /* ---- Footer ----------------------------------------------------------- */
 html[data-olxd="1"] #footerContent {
   background-color: var(--olxd-page) !important;
@@ -203,6 +226,13 @@ html[data-olxd="1"] #footerContent a:hover {
 /* The cookie-settings trigger is a button, not a link, and hardcodes the
    light theme's dark teal. */
 html[data-olxd="1"] #footerContent button {
+  color: var(--olxd-text-dim) !important;
+}
+
+/* The SEO bands above the footer ("Categorias", "Anúncios por localidade")
+   label their links with the #406367 primitive as ink. */
+html[data-olxd="1"] [data-testid="categories-footer-parent-content"] span,
+html[data-olxd="1"] [data-testid="l-location-links-content"] span {
   color: var(--olxd-text-dim) !important;
 }
 
